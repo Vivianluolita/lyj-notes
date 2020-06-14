@@ -1,0 +1,22 @@
+language: node_js
+node_js: stable
+branches:
+  only:
+  - master
+before_install:
+- git config --global user.name "Vivianluolita"
+- git config --global user.email "15071362462@163.com"
+install:
+- npm install -g gitbook-cli
+script:
+- gitbook -V
+- gitbook install
+- gitbook build
+- cd _book
+- git init
+- git commit --allow-empty -m 'update book'
+- git checkout -b gh-pages && touch .nojekyll
+- git add .
+- git commit -am 'update book'
+after_success:
+- git push https://$REPO_TOKEN@github.com/Vivianluolita/lyj-notes gh-pages --force

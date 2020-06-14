@@ -1,0 +1,2039 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>less即学即用 · lyj's Glory</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="lyj">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-lightbox/css/lightbox.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="webpack打包原理详解.html" />
+    
+    
+    <link rel="prev" href="b站vue商城实战.html" />
+    
+
+    </head>
+    <body>
+        
+
+<!-- begin mouseflow  embed code -->
+
+<script type="text/javascript">
+    window._mfq = window._mfq || [];
+    (function() {
+        var mf = document.createElement("script");
+        mf.type = "text/javascript"; mf.async = true;
+        mf.src = "//cdn.mouseflow.com/projects/12345678abc.js";
+        document.getElementsByTagName("head")[0].appendChild(mf);
+    })();
+</script>
+
+<!-- end mouseflow  embed code -->
+
+    
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Lyj's blog
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../readme.html">
+            
+                <a href="../readme.html">
+            
+                    
+                    tools
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" >
+            
+                <span>
+            
+                    
+                    Gitbook
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="../gitbook/install.html">
+            
+                <a href="../gitbook/install.html">
+            
+                    
+                    安装配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.2" data-path="../gitbook/build.html">
+            
+                <a href="../gitbook/build.html">
+            
+                    
+                    项目创建
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.3" data-path="../gitbook/command.html">
+            
+                <a href="../gitbook/command.html">
+            
+                    
+                    命令集合
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.4" data-path="../gitbook/issue.html">
+            
+                <a href="../gitbook/issue.html">
+            
+                    
+                    问题与解答
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../git/git.html">
+            
+                <a href="../git/git.html">
+            
+                    
+                    Git
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.2.1" data-path="../git/install.html">
+            
+                <a href="../git/install.html">
+            
+                    
+                    mkdir、status、reflog、stage
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2.2" data-path="../git/build.html">
+            
+                <a href="../git/build.html">
+            
+                    
+                    add、commit、checkout(撤销修改)、rm、remote
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2.3" data-path="../git/command.html">
+            
+                <a href="../git/command.html">
+            
+                    
+                    命令集合
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" >
+            
+                <span>
+            
+                    
+                    vue
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.3.1" >
+            
+                <span>
+            
+                    
+                    content1
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.3.1.1" data-path="../vue/content1/basis.html">
+            
+                <a href="../vue/content1/basis.html">
+            
+                    
+                    basis
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.1.2" data-path="../vue/content1/complex-component.html">
+            
+                <a href="../vue/content1/complex-component.html">
+            
+                    
+                    complex-component
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.1.3" data-path="../vue/content1/ifAndShow.html">
+            
+                <a href="../vue/content1/ifAndShow.html">
+            
+                    
+                    ifAndShow
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.1.4" data-path="../vue/content1/instruction.html">
+            
+                <a href="../vue/content1/instruction.html">
+            
+                    
+                    instruction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.1.5" data-path="../vue/content1/key.html">
+            
+                <a href="../vue/content1/key.html">
+            
+                    
+                    key
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.1.6" data-path="../vue/content1/modified.html">
+            
+                <a href="../vue/content1/modified.html">
+            
+                    
+                    modified
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.1.7" data-path="../vue/content1/v-on.html">
+            
+                <a href="../vue/content1/v-on.html">
+            
+                    
+                    v-on
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.1.8" data-path="../vue/content1/vuefragment.html">
+            
+                <a href="../vue/content1/vuefragment.html">
+            
+                    
+                    vuefragment
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.1.9" data-path="../vue/content1/webpack.html">
+            
+                <a href="../vue/content1/webpack.html">
+            
+                    
+                    webpack
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.2" >
+            
+                <span>
+            
+                    
+                    content2
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.3.2.1" data-path="../vue/content2/component.html">
+            
+                <a href="../vue/content2/component.html">
+            
+                    
+                    component
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.2.2" data-path="../vue/content2/keep-alive.html">
+            
+                <a href="../vue/content2/keep-alive.html">
+            
+                    
+                    keep-alive
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.2.3" data-path="../vue/content2/life-time.html">
+            
+                <a href="../vue/content2/life-time.html">
+            
+                    
+                    life-time
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.3" >
+            
+                <span>
+            
+                    
+                    admin-web
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.3.3.1" data-path="../vue/admin-web/api-config.html">
+            
+                <a href="../vue/admin-web/api-config.html">
+            
+                    
+                    api-config
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.3.2" data-path="../vue/admin-web/router.html">
+            
+                <a href="../vue/admin-web/router.html">
+            
+                    
+                    router
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.3.3" data-path="../vue/admin-web/proxy.html">
+            
+                <a href="../vue/admin-web/proxy.html">
+            
+                    
+                    proxy
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.4" >
+            
+                <span>
+            
+                    
+                    ts-web
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.3.4.1" data-path="../vue/ts-web/bohe.html">
+            
+                <a href="../vue/ts-web/bohe.html">
+            
+                    
+                    bohe
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.4.2" data-path="../vue/ts-web/fillzilla.html">
+            
+                <a href="../vue/ts-web/fillzilla.html">
+            
+                    
+                    fillzilla
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.4.3" data-path="../vue/ts-web/seo.html">
+            
+                <a href="../vue/ts-web/seo.html">
+            
+                    
+                    seo
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.4.4" data-path="../vue/ts-web/ts-study.html">
+            
+                <a href="../vue/ts-web/ts-study.html">
+            
+                    
+                    ts-study
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.5" >
+            
+                <span>
+            
+                    
+                    work-nn
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.3.5.1" data-path="../vue/work-nn/token-vuex.html">
+            
+                <a href="../vue/work-nn/token-vuex.html">
+            
+                    
+                    token-vuex
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.5.2" data-path="../vue/work-nn/axios-interceptor.html">
+            
+                <a href="../vue/work-nn/axios-interceptor.html">
+            
+                    
+                    axios-interceptor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.5.3" data-path="../vue/work-nn/electron-interface.html">
+            
+                <a href="../vue/work-nn/electron-interface.html">
+            
+                    
+                    electron-interface
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6" >
+            
+                <span>
+            
+                    
+                    vuex
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.3.6.1" data-path="../vue/vuex/component.html">
+            
+                <a href="../vue/vuex/component.html">
+            
+                    
+                    component
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.2" data-path="../vue/vuex/computed.html">
+            
+                <a href="../vue/vuex/computed.html">
+            
+                    
+                    computed
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.3" data-path="../vue/vuex/data-dictionary.html">
+            
+                <a href="../vue/vuex/data-dictionary.html">
+            
+                    
+                    data-dictionary
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.4" data-path="../vue/vuex/document-this.html">
+            
+                <a href="../vue/vuex/document-this.html">
+            
+                    
+                    document-this
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.5" data-path="../vue/vuex/download.html">
+            
+                <a href="../vue/vuex/download.html">
+            
+                    
+                    download
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.6" data-path="../vue/vuex/el-pagination.html">
+            
+                <a href="../vue/vuex/el-pagination.html">
+            
+                    
+                    el-pagination
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.7" data-path="../vue/vuex/element-dialog.html">
+            
+                <a href="../vue/vuex/element-dialog.html">
+            
+                    
+                    element-dialog
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.8" data-path="../vue/vuex/element-tab.html">
+            
+                <a href="../vue/vuex/element-tab.html">
+            
+                    
+                    element-tab
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.9" data-path="../vue/vuex/element-ui-tab.html">
+            
+                <a href="../vue/vuex/element-ui-tab.html">
+            
+                    
+                    element-ui-tab
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.10" data-path="../vue/vuex/elementui-table-sortable.html">
+            
+                <a href="../vue/vuex/elementui-table-sortable.html">
+            
+                    
+                    elementui-table-sortable
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.11" data-path="../vue/vuex/es6.html">
+            
+                <a href="../vue/vuex/es6.html">
+            
+                    
+                    es6
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.12" data-path="../vue/vuex/eslink.html">
+            
+                <a href="../vue/vuex/eslink.html">
+            
+                    
+                    eslink
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.13" data-path="../vue/vuex/form-rule.html">
+            
+                <a href="../vue/vuex/form-rule.html">
+            
+                    
+                    form-rule
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.14" data-path="../vue/vuex/install-fummz-matching.md">
+            
+                <span>
+            
+                    
+                    fummz-matching
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.15" data-path="../vue/vuex/git.html">
+            
+                <a href="../vue/vuex/git.html">
+            
+                    
+                    git
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.16" data-path="../vue/vuex/install-question.html">
+            
+                <a href="../vue/vuex/install-question.html">
+            
+                    
+                    install-question
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.17" data-path="../vue/vuex/interface-tool.html">
+            
+                <a href="../vue/vuex/interface-tool.html">
+            
+                    
+                    interface-tool
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.18" data-path="../vue/vuex/mayun-merge.html">
+            
+                <a href="../vue/vuex/mayun-merge.html">
+            
+                    
+                    mayun-merge
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.19" data-path="../vue/vuex/mixins.html">
+            
+                <a href="../vue/vuex/mixins.html">
+            
+                    
+                    mixins
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.20" data-path="../vue/vuex/prop.html">
+            
+                <a href="../vue/vuex/prop.html">
+            
+                    
+                    prop
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.21" data-path="../vue/vuex/router-jump.html">
+            
+                <a href="../vue/vuex/router-jump.html">
+            
+                    
+                    router-jump
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.22" data-path="../vue/vuex/router-push.html">
+            
+                <a href="../vue/vuex/router-push.html">
+            
+                    
+                    router-push
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.23" data-path="../vue/vuex/store.html">
+            
+                <a href="../vue/vuex/store.html">
+            
+                    
+                    store
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.24" data-path="../vue/vuex/v-loading.html">
+            
+                <a href="../vue/vuex/v-loading.html">
+            
+                    
+                    v-loading
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.25" data-path="../vue/vuex/v-model.html">
+            
+                <a href="../vue/vuex/v-model.html">
+            
+                    
+                    v-model
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.26" data-path="../vue/vuex/video-components.html">
+            
+                <a href="../vue/vuex/video-components.html">
+            
+                    
+                    video-components
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.27" data-path="../vue/vuex/vue-router-tab.html">
+            
+                <a href="../vue/vuex/vue-router-tab.html">
+            
+                    
+                    vue-router-tab
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.28" data-path="../vue/vuex/vue-watch.html">
+            
+                <a href="../vue/vuex/vue-watch.html">
+            
+                    
+                    vue-watch
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.29" data-path="../vue/vuex/vuex-clear-vmodel.html">
+            
+                <a href="../vue/vuex/vuex-clear-vmodel.html">
+            
+                    
+                    vuex-clear-vmodel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.30" data-path="../vue/vuex/vuex-todo.html">
+            
+                <a href="../vue/vuex/vuex-todo.html">
+            
+                    
+                    vuex-todo
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" >
+            
+                <span>
+            
+                    
+                    interview
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.4.1" data-path="../interview/cross-domain/cross-domain.html">
+            
+                <a href="../interview/cross-domain/cross-domain.html">
+            
+                    
+                    跨域相关
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4.2" data-path="../interview/prototype-closure/prototype-closure.html">
+            
+                <a href="../interview/prototype-closure/prototype-closure.html">
+            
+                    
+                    深入理解 javascript 原型和闭包
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4.3" data-path="../interview/how-to-introduce/introduce.html">
+            
+                <a href="../interview/how-to-introduce/introduce.html">
+            
+                    
+                    summary
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4.4" data-path="../interview/performance-optimization/performance-optimization.html">
+            
+                <a href="../interview/performance-optimization/performance-optimization.html">
+            
+                    
+                    性能优化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4.5" data-path="../interview/url-parse/url-parse.html">
+            
+                <a href="../interview/url-parse/url-parse.html">
+            
+                    
+                    url 解析
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4.6" data-path="../interview/same-origin-policy/same-origin-policy.html">
+            
+                <a href="../interview/same-origin-policy/same-origin-policy.html">
+            
+                    
+                    跨域问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4.7" data-path="../interview/vue-router-refresh/vue-router-refresh.html">
+            
+                <a href="../interview/vue-router-refresh/vue-router-refresh.html">
+            
+                    
+                    VUE 返回上一页相关
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4.8" data-path="../interview/two-way-data-binding/two-way-data-binding.html">
+            
+                <a href="../interview/two-way-data-binding/two-way-data-binding.html">
+            
+                    
+                    VUE 的数据双向绑定
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4.9" data-path="../interview/Reverse-Proxy/Reverse-Proxy.html">
+            
+                <a href="../interview/Reverse-Proxy/Reverse-Proxy.html">
+            
+                    
+                    VUE-cli 反向代理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4.10" data-path="../interview/how-to-introduce/introduce.html">
+            
+                <a href="../interview/how-to-introduce/introduce.html">
+            
+                    
+                    interview
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" >
+            
+                <span>
+            
+                    
+                    jspractice
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.1" >
+            
+                <span>
+            
+                    
+                    practice
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.1.1" data-path="../jspractice/practice/javascript-puzzlers/javascript-puzzlers.html">
+            
+                <a href="../jspractice/practice/javascript-puzzlers/javascript-puzzlers.html">
+            
+                    
+                    javascript-puzzlers
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.1.2" data-path="../jspractice/practice/test-driven-js-assment/test-driven-js-assignment.html">
+            
+                <a href="../jspractice/practice/test-driven-js-assment/test-driven-js-assignment.html">
+            
+                    
+                    test-driven-js-assignment
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" >
+            
+                <span>
+            
+                    
+                    自动化
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.6.1" >
+            
+                <span>
+            
+                    
+                    travisCi
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.6.1.1" data-path="../Wh-coder/travisCi/travisCi.html">
+            
+                <a href="../Wh-coder/travisCi/travisCi.html">
+            
+                    
+                    travisCi
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6.2" >
+            
+                <span>
+            
+                    
+                    Git
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.6.2.1" data-path="../Wh-coder/Git/reset.html">
+            
+                <a href="../Wh-coder/Git/reset.html">
+            
+                    
+                    reset
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6.3" >
+            
+                <span>
+            
+                    
+                    package.json
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.6.3.1" data-path="../Wh-coder/package.json/package.json.html">
+            
+                <a href="../Wh-coder/package.json/package.json.html">
+            
+                    
+                    package.json
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6.4" >
+            
+                <span>
+            
+                    
+                    npm
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.6.4.1" data-path="../Wh-coder/npm/npm.html">
+            
+                <a href="../Wh-coder/npm/npm.html">
+            
+                    
+                    npm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" >
+            
+                <span>
+            
+                    
+                    mac
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.7.1" >
+            
+                <span>
+            
+                    
+                    mac快捷键
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.7.1.1" data-path="../Wh-coder/mac/快捷键.html">
+            
+                <a href="../Wh-coder/mac/快捷键.html">
+            
+                    
+                    mac快捷键
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" >
+            
+                <span>
+            
+                    
+                    学习
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.8.1" data-path="电商网站开发.html">
+            
+                <a href="电商网站开发.html">
+            
+                    
+                    电商网站开发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8.2" data-path="前端算法面试必备技巧.html">
+            
+                <a href="前端算法面试必备技巧.html">
+            
+                    
+                    前端算法面试必备技巧
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8.3" data-path="小马哥讲promise.html">
+            
+                <a href="小马哥讲promise.html">
+            
+                    
+                    小马哥讲promise
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8.4" data-path="一课全面掌握逐流css布局.html">
+            
+                <a href="一课全面掌握逐流css布局.html">
+            
+                    
+                    一课全面掌握逐流css布局
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8.5" data-path="b站vue商城实战.html">
+            
+                <a href="b站vue商城实战.html">
+            
+                    
+                    b站vue商城实战
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.8.6" data-path="less即学即用.html">
+            
+                <a href="less即学即用.html">
+            
+                    
+                    less即学即用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8.7" data-path="webpack打包原理详解.html">
+            
+                <a href="webpack打包原理详解.html">
+            
+                    
+                    webpack打包原理详解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8.8" data-path="vuex从入门到实战.html">
+            
+                <a href="vuex从入门到实战.html">
+            
+                    
+                    vuex从入门到实战
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8.9" data-path="2020vue魔鬼训练营.html">
+            
+                <a href="2020vue魔鬼训练营.html">
+            
+                    
+                    2020vue魔鬼训练营
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8.10" data-path="抖音.html">
+            
+                <a href="抖音.html">
+            
+                    
+                    抖音
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8.11" data-path="华为.html">
+            
+                <a href="华为.html">
+            
+                    
+                    华为
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8.12" data-path="极客时间-webpack.html">
+            
+                <a href="极客时间-webpack.html">
+            
+                    
+                    极客时间-webpack
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8.13" data-path="js从入门到放弃.html">
+            
+                <a href="js从入门到放弃.html">
+            
+                    
+                    js从入门到放弃
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8.14" data-path="一课全面掌握逐流css布局.html">
+            
+                <a href="一课全面掌握逐流css布局.html">
+            
+                    
+                    一课全面掌握逐流css布局
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8.15" data-path="webpack打包原理详解.html">
+            
+                <a href="webpack打包原理详解.html">
+            
+                    
+                    webpack打包原理详解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8.16" data-path="用Vue监听购物车数量及模糊查询.html">
+            
+                <a href="用Vue监听购物车数量及模糊查询.html">
+            
+                    
+                    用Vue监听购物车数量及模糊查询
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9" >
+            
+                <span>
+            
+                    
+                    react
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.9.1" >
+            
+                <span>
+            
+                    
+                    react-content
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.9.1.1" data-path="../react/react-content">
+            
+                <span>
+            
+                    
+                    react-todomvc
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9.2" >
+            
+                <span>
+            
+                    
+                    redux
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.9.2.1" data-path="../react/redux/Complete-React-Redux-Tutoria.html">
+            
+                <a href="../react/redux/Complete-React-Redux-Tutoria.html">
+            
+                    
+                    Complete-React-Redux-Tutoria
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9.3" >
+            
+                <span>
+            
+                    
+                    react-document
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.9.3.1" data-path="../react/react-document/react-document.html">
+            
+                <a href="../react/react-document/react-document.html">
+            
+                    
+                    react-document
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.10" >
+            
+                <span>
+            
+                    
+                    work
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.10.1" data-path="../work/lyj-makescheme-summary.html">
+            
+                <a href="../work/lyj-makescheme-summary.html">
+            
+                    
+                    lyj-makescheme-summary
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.10.2" data-path="../work/work-summary.html">
+            
+                <a href="../work/work-summary.html">
+            
+                    
+                    lyj-work-summary
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >less即学即用</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h3 id="less&#x4E2D;&#x7684;&#x53D8;&#x91CF;">less&#x4E2D;&#x7684;&#x53D8;&#x91CF;</h3>
+<pre><code>&#x58F0;&#x660E;&#x7528;@&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;@&#x53D8;&#x91CF;&#x540D;&#xFF1A;&#x503C;
+
+@test_width:300px;
+.box{
+  width:@test_width
+}
+</code></pre><h3 id="&#x6DF7;&#x5408;">&#x6DF7;&#x5408;</h3>
+<p>&#x628A;&#x4EE5;&#x524D;&#x7528;&#x8FC7;&#x7684;&#x6837;&#x5F0F;(.box)&#x76F4;&#x63A5;&#x62FF;&#x8FC7;&#x6765;&#x7528;</p>
+<pre><code>.box2{
+  .box
+  margin-left:200px;
+}
+</code></pre><p>&#x6DF7;&#x5408;&#x53EF;&#x4EE5;&#x5E26;&#x53C2;&#x6570;</p>
+<pre><code>.border{
+  border:solid 5px pink
+}
+
+.border_02(@border_width){
+  border:solid @boeder_width pink;
+}
+
+.test_hunhe{
+  .border_02(30px)
+}
+</code></pre><h3 id="&#x5339;&#x914D;&#x6A21;&#x5F0F;">&#x5339;&#x914D;&#x6A21;&#x5F0F;</h3>
+<ul>
+<li>&#x5B9A;&#x4F4D;</li>
+</ul>
+<h3 id="&#x5D4C;&#x5957;&#x89C4;&#x5219;">&#x5D4C;&#x5957;&#x89C4;&#x5219;</h3>
+<p><a href="../../image/html/css56.png" data-lightbox="5d8ef2be-9e33-48a0-836a-b27116e365ed" data-title="111"><img src="../../image/html/css56.png" alt="111"></a></p>
+<h3 id="arguments&#x53D8;&#x91CF;">@arguments&#x53D8;&#x91CF;</h3>
+<p><a href="../../image/html/css57.png" data-lightbox="de4cab5e-72ff-4e9e-addd-6a9fad9a7df6" data-title="111"><img src="../../image/html/css57.png" alt="111"></a></p>
+<pre><code>@arguments&#x4EE3;&#x66FF;&#x6240;&#x6709;&#x7684;&#x53C2;&#x6570;
+
+.test_arguments{
+  border:30px solid #ff0000
+}
+</code></pre><h3 id="&#x907F;&#x514D;&#x7F16;&#x8BD1;&#x548C;important">&#x907F;&#x514D;&#x7F16;&#x8BD1;&#x548C;@important</h3>
+<p><a href="../../image/html/css58.png" data-lightbox="949a17aa-7ffc-4c81-ae2d-cab7039f93df" data-title="111"><img src="../../image/html/css58.png" alt="111"></a></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="b站vue商城实战.html" class="navigation navigation-prev " aria-label="Previous page: b站vue商城实战">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="webpack打包原理详解.html" class="navigation navigation-next " aria-label="Next page: webpack打包原理详解">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"less即学即用","level":"1.2.8.6","depth":3,"next":{"title":"webpack打包原理详解","level":"1.2.8.7","depth":3,"path":"tools/course/webpack打包原理详解.md","ref":"tools/course/webpack打包原理详解.md","articles":[]},"previous":{"title":"b站vue商城实战","level":"1.2.8.5","depth":3,"path":"tools/course/b站vue商城实战.md","ref":"tools/course/b站vue商城实战.md","articles":[]},"dir":"ltr"},"config":{"plugins":["mouseflow","lightbox"],"styles":{"website":"./styles/website.css"},"pluginsConfig":{"mouseflow":{"projectId":"12345678abc"},"lightbox":{"jquery":true,"sameUuid":false},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"lyj","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"lyj's Glory","language":"zh-hans","gitbook":"3.2.3","description":"select * from learn"},"file":{"path":"tools/course/less即学即用.md","mtime":"2020-06-14T18:47:03.152Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-14T18:47:53.402Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lightbox/js/lightbox.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

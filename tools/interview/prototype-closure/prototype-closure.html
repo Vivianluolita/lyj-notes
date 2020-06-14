@@ -1,0 +1,2566 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>深入理解 javascript 原型和闭包 · lyj's Glory</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="lyj">
+        
+        
+    
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-lightbox/css/lightbox.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../how-to-introduce/introduce.html" />
+    
+    
+    <link rel="prev" href="../cross-domain/cross-domain.html" />
+    
+
+    </head>
+    <body>
+        
+
+<!-- begin mouseflow  embed code -->
+
+<script type="text/javascript">
+    window._mfq = window._mfq || [];
+    (function() {
+        var mf = document.createElement("script");
+        mf.type = "text/javascript"; mf.async = true;
+        mf.src = "//cdn.mouseflow.com/projects/12345678abc.js";
+        document.getElementsByTagName("head")[0].appendChild(mf);
+    })();
+</script>
+
+<!-- end mouseflow  embed code -->
+
+    
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                    Lyj's blog
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../readme.html">
+            
+                <a href="../../readme.html">
+            
+                    
+                    tools
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" >
+            
+                <span>
+            
+                    
+                    Gitbook
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="../../gitbook/install.html">
+            
+                <a href="../../gitbook/install.html">
+            
+                    
+                    安装配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.2" data-path="../../gitbook/build.html">
+            
+                <a href="../../gitbook/build.html">
+            
+                    
+                    项目创建
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.3" data-path="../../gitbook/command.html">
+            
+                <a href="../../gitbook/command.html">
+            
+                    
+                    命令集合
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.4" data-path="../../gitbook/issue.html">
+            
+                <a href="../../gitbook/issue.html">
+            
+                    
+                    问题与解答
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../../git/git.html">
+            
+                <a href="../../git/git.html">
+            
+                    
+                    Git
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.2.1" data-path="../../git/install.html">
+            
+                <a href="../../git/install.html">
+            
+                    
+                    mkdir、status、reflog、stage
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2.2" data-path="../../git/build.html">
+            
+                <a href="../../git/build.html">
+            
+                    
+                    add、commit、checkout(撤销修改)、rm、remote
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2.3" data-path="../../git/command.html">
+            
+                <a href="../../git/command.html">
+            
+                    
+                    命令集合
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" >
+            
+                <span>
+            
+                    
+                    vue
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.3.1" >
+            
+                <span>
+            
+                    
+                    content1
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.3.1.1" data-path="../../vue/content1/basis.html">
+            
+                <a href="../../vue/content1/basis.html">
+            
+                    
+                    basis
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.1.2" data-path="../../vue/content1/complex-component.html">
+            
+                <a href="../../vue/content1/complex-component.html">
+            
+                    
+                    complex-component
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.1.3" data-path="../../vue/content1/ifAndShow.html">
+            
+                <a href="../../vue/content1/ifAndShow.html">
+            
+                    
+                    ifAndShow
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.1.4" data-path="../../vue/content1/instruction.html">
+            
+                <a href="../../vue/content1/instruction.html">
+            
+                    
+                    instruction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.1.5" data-path="../../vue/content1/key.html">
+            
+                <a href="../../vue/content1/key.html">
+            
+                    
+                    key
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.1.6" data-path="../../vue/content1/modified.html">
+            
+                <a href="../../vue/content1/modified.html">
+            
+                    
+                    modified
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.1.7" data-path="../../vue/content1/v-on.html">
+            
+                <a href="../../vue/content1/v-on.html">
+            
+                    
+                    v-on
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.1.8" data-path="../../vue/content1/vuefragment.html">
+            
+                <a href="../../vue/content1/vuefragment.html">
+            
+                    
+                    vuefragment
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.1.9" data-path="../../vue/content1/webpack.html">
+            
+                <a href="../../vue/content1/webpack.html">
+            
+                    
+                    webpack
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.2" >
+            
+                <span>
+            
+                    
+                    content2
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.3.2.1" data-path="../../vue/content2/component.html">
+            
+                <a href="../../vue/content2/component.html">
+            
+                    
+                    component
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.2.2" data-path="../../vue/content2/keep-alive.html">
+            
+                <a href="../../vue/content2/keep-alive.html">
+            
+                    
+                    keep-alive
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.2.3" data-path="../../vue/content2/life-time.html">
+            
+                <a href="../../vue/content2/life-time.html">
+            
+                    
+                    life-time
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.3" >
+            
+                <span>
+            
+                    
+                    admin-web
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.3.3.1" data-path="../../vue/admin-web/api-config.html">
+            
+                <a href="../../vue/admin-web/api-config.html">
+            
+                    
+                    api-config
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.3.2" data-path="../../vue/admin-web/router.html">
+            
+                <a href="../../vue/admin-web/router.html">
+            
+                    
+                    router
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.3.3" data-path="../../vue/admin-web/proxy.html">
+            
+                <a href="../../vue/admin-web/proxy.html">
+            
+                    
+                    proxy
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.4" >
+            
+                <span>
+            
+                    
+                    ts-web
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.3.4.1" data-path="../../vue/ts-web/bohe.html">
+            
+                <a href="../../vue/ts-web/bohe.html">
+            
+                    
+                    bohe
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.4.2" data-path="../../vue/ts-web/fillzilla.html">
+            
+                <a href="../../vue/ts-web/fillzilla.html">
+            
+                    
+                    fillzilla
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.4.3" data-path="../../vue/ts-web/seo.html">
+            
+                <a href="../../vue/ts-web/seo.html">
+            
+                    
+                    seo
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.4.4" data-path="../../vue/ts-web/ts-study.html">
+            
+                <a href="../../vue/ts-web/ts-study.html">
+            
+                    
+                    ts-study
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.5" >
+            
+                <span>
+            
+                    
+                    work-nn
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.3.5.1" data-path="../../vue/work-nn/token-vuex.html">
+            
+                <a href="../../vue/work-nn/token-vuex.html">
+            
+                    
+                    token-vuex
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.5.2" data-path="../../vue/work-nn/axios-interceptor.html">
+            
+                <a href="../../vue/work-nn/axios-interceptor.html">
+            
+                    
+                    axios-interceptor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.5.3" data-path="../../vue/work-nn/electron-interface.html">
+            
+                <a href="../../vue/work-nn/electron-interface.html">
+            
+                    
+                    electron-interface
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6" >
+            
+                <span>
+            
+                    
+                    vuex
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.3.6.1" data-path="../../vue/vuex/component.html">
+            
+                <a href="../../vue/vuex/component.html">
+            
+                    
+                    component
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.2" data-path="../../vue/vuex/computed.html">
+            
+                <a href="../../vue/vuex/computed.html">
+            
+                    
+                    computed
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.3" data-path="../../vue/vuex/data-dictionary.html">
+            
+                <a href="../../vue/vuex/data-dictionary.html">
+            
+                    
+                    data-dictionary
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.4" data-path="../../vue/vuex/document-this.html">
+            
+                <a href="../../vue/vuex/document-this.html">
+            
+                    
+                    document-this
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.5" data-path="../../vue/vuex/download.html">
+            
+                <a href="../../vue/vuex/download.html">
+            
+                    
+                    download
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.6" data-path="../../vue/vuex/el-pagination.html">
+            
+                <a href="../../vue/vuex/el-pagination.html">
+            
+                    
+                    el-pagination
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.7" data-path="../../vue/vuex/element-dialog.html">
+            
+                <a href="../../vue/vuex/element-dialog.html">
+            
+                    
+                    element-dialog
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.8" data-path="../../vue/vuex/element-tab.html">
+            
+                <a href="../../vue/vuex/element-tab.html">
+            
+                    
+                    element-tab
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.9" data-path="../../vue/vuex/element-ui-tab.html">
+            
+                <a href="../../vue/vuex/element-ui-tab.html">
+            
+                    
+                    element-ui-tab
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.10" data-path="../../vue/vuex/elementui-table-sortable.html">
+            
+                <a href="../../vue/vuex/elementui-table-sortable.html">
+            
+                    
+                    elementui-table-sortable
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.11" data-path="../../vue/vuex/es6.html">
+            
+                <a href="../../vue/vuex/es6.html">
+            
+                    
+                    es6
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.12" data-path="../../vue/vuex/eslink.html">
+            
+                <a href="../../vue/vuex/eslink.html">
+            
+                    
+                    eslink
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.13" data-path="../../vue/vuex/form-rule.html">
+            
+                <a href="../../vue/vuex/form-rule.html">
+            
+                    
+                    form-rule
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.14" data-path="../../vue/vuex/install-fummz-matching.md">
+            
+                <span>
+            
+                    
+                    fummz-matching
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.15" data-path="../../vue/vuex/git.html">
+            
+                <a href="../../vue/vuex/git.html">
+            
+                    
+                    git
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.16" data-path="../../vue/vuex/install-question.html">
+            
+                <a href="../../vue/vuex/install-question.html">
+            
+                    
+                    install-question
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.17" data-path="../../vue/vuex/interface-tool.html">
+            
+                <a href="../../vue/vuex/interface-tool.html">
+            
+                    
+                    interface-tool
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.18" data-path="../../vue/vuex/mayun-merge.html">
+            
+                <a href="../../vue/vuex/mayun-merge.html">
+            
+                    
+                    mayun-merge
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.19" data-path="../../vue/vuex/mixins.html">
+            
+                <a href="../../vue/vuex/mixins.html">
+            
+                    
+                    mixins
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.20" data-path="../../vue/vuex/prop.html">
+            
+                <a href="../../vue/vuex/prop.html">
+            
+                    
+                    prop
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.21" data-path="../../vue/vuex/router-jump.html">
+            
+                <a href="../../vue/vuex/router-jump.html">
+            
+                    
+                    router-jump
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.22" data-path="../../vue/vuex/router-push.html">
+            
+                <a href="../../vue/vuex/router-push.html">
+            
+                    
+                    router-push
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.23" data-path="../../vue/vuex/store.html">
+            
+                <a href="../../vue/vuex/store.html">
+            
+                    
+                    store
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.24" data-path="../../vue/vuex/v-loading.html">
+            
+                <a href="../../vue/vuex/v-loading.html">
+            
+                    
+                    v-loading
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.25" data-path="../../vue/vuex/v-model.html">
+            
+                <a href="../../vue/vuex/v-model.html">
+            
+                    
+                    v-model
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.26" data-path="../../vue/vuex/video-components.html">
+            
+                <a href="../../vue/vuex/video-components.html">
+            
+                    
+                    video-components
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.27" data-path="../../vue/vuex/vue-router-tab.html">
+            
+                <a href="../../vue/vuex/vue-router-tab.html">
+            
+                    
+                    vue-router-tab
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.28" data-path="../../vue/vuex/vue-watch.html">
+            
+                <a href="../../vue/vuex/vue-watch.html">
+            
+                    
+                    vue-watch
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.29" data-path="../../vue/vuex/vuex-clear-vmodel.html">
+            
+                <a href="../../vue/vuex/vuex-clear-vmodel.html">
+            
+                    
+                    vuex-clear-vmodel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.6.30" data-path="../../vue/vuex/vuex-todo.html">
+            
+                <a href="../../vue/vuex/vuex-todo.html">
+            
+                    
+                    vuex-todo
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" >
+            
+                <span>
+            
+                    
+                    interview
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.4.1" data-path="../cross-domain/cross-domain.html">
+            
+                <a href="../cross-domain/cross-domain.html">
+            
+                    
+                    跨域相关
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.4.2" data-path="prototype-closure.html">
+            
+                <a href="prototype-closure.html">
+            
+                    
+                    深入理解 javascript 原型和闭包
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4.3" data-path="../how-to-introduce/introduce.html">
+            
+                <a href="../how-to-introduce/introduce.html">
+            
+                    
+                    summary
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4.4" data-path="../performance-optimization/performance-optimization.html">
+            
+                <a href="../performance-optimization/performance-optimization.html">
+            
+                    
+                    性能优化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4.5" data-path="../url-parse/url-parse.html">
+            
+                <a href="../url-parse/url-parse.html">
+            
+                    
+                    url 解析
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4.6" data-path="../same-origin-policy/same-origin-policy.html">
+            
+                <a href="../same-origin-policy/same-origin-policy.html">
+            
+                    
+                    跨域问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4.7" data-path="../vue-router-refresh/vue-router-refresh.html">
+            
+                <a href="../vue-router-refresh/vue-router-refresh.html">
+            
+                    
+                    VUE 返回上一页相关
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4.8" data-path="../two-way-data-binding/two-way-data-binding.html">
+            
+                <a href="../two-way-data-binding/two-way-data-binding.html">
+            
+                    
+                    VUE 的数据双向绑定
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4.9" data-path="../Reverse-Proxy/Reverse-Proxy.html">
+            
+                <a href="../Reverse-Proxy/Reverse-Proxy.html">
+            
+                    
+                    VUE-cli 反向代理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4.10" data-path="../how-to-introduce/introduce.html">
+            
+                <a href="../how-to-introduce/introduce.html">
+            
+                    
+                    interview
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" >
+            
+                <span>
+            
+                    
+                    jspractice
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.1" >
+            
+                <span>
+            
+                    
+                    practice
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.1.1" data-path="../../jspractice/practice/javascript-puzzlers/javascript-puzzlers.html">
+            
+                <a href="../../jspractice/practice/javascript-puzzlers/javascript-puzzlers.html">
+            
+                    
+                    javascript-puzzlers
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.1.2" data-path="../../jspractice/practice/test-driven-js-assment/test-driven-js-assignment.html">
+            
+                <a href="../../jspractice/practice/test-driven-js-assment/test-driven-js-assignment.html">
+            
+                    
+                    test-driven-js-assignment
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" >
+            
+                <span>
+            
+                    
+                    自动化
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.6.1" >
+            
+                <span>
+            
+                    
+                    travisCi
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.6.1.1" data-path="../../Wh-coder/travisCi/travisCi.html">
+            
+                <a href="../../Wh-coder/travisCi/travisCi.html">
+            
+                    
+                    travisCi
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6.2" >
+            
+                <span>
+            
+                    
+                    Git
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.6.2.1" data-path="../../Wh-coder/Git/reset.html">
+            
+                <a href="../../Wh-coder/Git/reset.html">
+            
+                    
+                    reset
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6.3" >
+            
+                <span>
+            
+                    
+                    package.json
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.6.3.1" data-path="../../Wh-coder/package.json/package.json.html">
+            
+                <a href="../../Wh-coder/package.json/package.json.html">
+            
+                    
+                    package.json
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6.4" >
+            
+                <span>
+            
+                    
+                    npm
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.6.4.1" data-path="../../Wh-coder/npm/npm.html">
+            
+                <a href="../../Wh-coder/npm/npm.html">
+            
+                    
+                    npm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" >
+            
+                <span>
+            
+                    
+                    mac
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.7.1" >
+            
+                <span>
+            
+                    
+                    mac快捷键
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.7.1.1" data-path="../../Wh-coder/mac/快捷键.html">
+            
+                <a href="../../Wh-coder/mac/快捷键.html">
+            
+                    
+                    mac快捷键
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" >
+            
+                <span>
+            
+                    
+                    学习
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.8.1" data-path="../../course/电商网站开发.html">
+            
+                <a href="../../course/电商网站开发.html">
+            
+                    
+                    电商网站开发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8.2" data-path="../../course/前端算法面试必备技巧.html">
+            
+                <a href="../../course/前端算法面试必备技巧.html">
+            
+                    
+                    前端算法面试必备技巧
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8.3" data-path="../../course/小马哥讲promise.html">
+            
+                <a href="../../course/小马哥讲promise.html">
+            
+                    
+                    小马哥讲promise
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8.4" data-path="../../course/一课全面掌握逐流css布局.html">
+            
+                <a href="../../course/一课全面掌握逐流css布局.html">
+            
+                    
+                    一课全面掌握逐流css布局
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8.5" data-path="../../course/b站vue商城实战.html">
+            
+                <a href="../../course/b站vue商城实战.html">
+            
+                    
+                    b站vue商城实战
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8.6" data-path="../../course/less即学即用.html">
+            
+                <a href="../../course/less即学即用.html">
+            
+                    
+                    less即学即用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8.7" data-path="../../course/webpack打包原理详解.html">
+            
+                <a href="../../course/webpack打包原理详解.html">
+            
+                    
+                    webpack打包原理详解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8.8" data-path="../../course/vuex从入门到实战.html">
+            
+                <a href="../../course/vuex从入门到实战.html">
+            
+                    
+                    vuex从入门到实战
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8.9" data-path="../../course/2020vue魔鬼训练营.html">
+            
+                <a href="../../course/2020vue魔鬼训练营.html">
+            
+                    
+                    2020vue魔鬼训练营
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8.10" data-path="../../course/抖音.html">
+            
+                <a href="../../course/抖音.html">
+            
+                    
+                    抖音
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8.11" data-path="../../course/华为.html">
+            
+                <a href="../../course/华为.html">
+            
+                    
+                    华为
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8.12" data-path="../../course/极客时间-webpack.html">
+            
+                <a href="../../course/极客时间-webpack.html">
+            
+                    
+                    极客时间-webpack
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8.13" data-path="../../course/js从入门到放弃.html">
+            
+                <a href="../../course/js从入门到放弃.html">
+            
+                    
+                    js从入门到放弃
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8.14" data-path="../../course/一课全面掌握逐流css布局.html">
+            
+                <a href="../../course/一课全面掌握逐流css布局.html">
+            
+                    
+                    一课全面掌握逐流css布局
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8.15" data-path="../../course/webpack打包原理详解.html">
+            
+                <a href="../../course/webpack打包原理详解.html">
+            
+                    
+                    webpack打包原理详解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8.16" data-path="../../course/用Vue监听购物车数量及模糊查询.html">
+            
+                <a href="../../course/用Vue监听购物车数量及模糊查询.html">
+            
+                    
+                    用Vue监听购物车数量及模糊查询
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9" >
+            
+                <span>
+            
+                    
+                    react
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.9.1" >
+            
+                <span>
+            
+                    
+                    react-content
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.9.1.1" data-path="../../react/react-content">
+            
+                <span>
+            
+                    
+                    react-todomvc
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9.2" >
+            
+                <span>
+            
+                    
+                    redux
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.9.2.1" data-path="../../react/redux/Complete-React-Redux-Tutoria.html">
+            
+                <a href="../../react/redux/Complete-React-Redux-Tutoria.html">
+            
+                    
+                    Complete-React-Redux-Tutoria
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9.3" >
+            
+                <span>
+            
+                    
+                    react-document
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.9.3.1" data-path="../../react/react-document/react-document.html">
+            
+                <a href="../../react/react-document/react-document.html">
+            
+                    
+                    react-document
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.10" >
+            
+                <span>
+            
+                    
+                    work
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.10.1" data-path="../../work/lyj-makescheme-summary.html">
+            
+                <a href="../../work/lyj-makescheme-summary.html">
+            
+                    
+                    lyj-makescheme-summary
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.10.2" data-path="../../work/work-summary.html">
+            
+                <a href="../../work/work-summary.html">
+            
+                    
+                    lyj-work-summary
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../.." >深入理解 javascript 原型和闭包</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h3 id="&#x539F;&#x6587;&#x53C2;&#x7167;-&#x6DF1;&#x5165;&#x7406;&#x89E3;javascript&#x539F;&#x578B;&#x548C;&#x95ED;&#x5305;&#x7CFB;&#x5217;">&#x539F;&#x6587;&#x53C2;&#x7167; <a href="https://www.cnblogs.com/wangfupeng1988/tag/%E4%BD%9C%E7%94%A8%E5%9F%9F/" target="_blank">&#x6DF1;&#x5165;&#x7406;&#x89E3;javascript&#x539F;&#x578B;&#x548C;&#x95ED;&#x5305;&#x7CFB;&#x5217;</a></h3>
+<h2 id="&#x7406;&#x89E3;javascript&#x539F;&#x578B;&#x548C;&#x4F5C;&#x7528;&#x57DF;&#x7CFB;&#x5217;&#xFF08;1&#xFF09;&#x2014;&#x2014;&#x4E00;&#x5207;&#x90FD;&#x662F;&#x5BF9;&#x8C61;">&#x7406;&#x89E3;javascript&#x539F;&#x578B;&#x548C;&#x4F5C;&#x7528;&#x57DF;&#x7CFB;&#x5217;&#xFF08;1&#xFF09;&#x2014;&#x2014;&#x4E00;&#x5207;&#x90FD;&#x662F;&#x5BF9;&#x8C61;</h2>
+<ol>
+<li>&#x503C;&#x7C7B;&#x578B;&#x4E0D;&#x662F;&#x5BF9;&#x8C61;&#xFF0C;</li>
+<li>typeof &#x68C0;&#x6D4B;&#x503C;&#x7C7B;&#x578B; undefined, number, string, boolean&#xFF1B;&#x5269;&#x4E0B;&#x7684;&#x90FD;&#x662F;&#x5F15;&#x7528;&#x7C7B;&#x578B;&#xFF0C;&#x5305;&#x62EC;&#x51FD;&#x6570;&#x3001;&#x6570;&#x7EC4;&#x3001;&#x5BF9;&#x8C61;&#x3001;null&#xFF1B;&#x5176;&#x4E2D; function &#x53EF;&#x4EE5;&#x88AB; typeof &#x8BC6;&#x522B;&#xFF1B;&#x6700;&#x540E;&#x8FD8;&#x6709;&#x4E00;&#x79CD;&#x53EF;&#x4EE5;&#x8BC6;&#x522B;&#x7684;&#x662F; es6 symbol</li>
+<li>&#x51FD;&#x6570;&#x4E5F;&#x662F;&#x4E00;&#x79CD;&#x5BF9;&#x8C61;&#x3002;&#x4ED6;&#x4E5F;&#x662F;&#x5C5E;&#x6027;&#x7684;&#x96C6;&#x5408;&#xFF0C;&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x5BF9;&#x51FD;&#x6570;&#x8FDB;&#x884C;&#x81EA;&#x5B9A;&#x4E49;&#x5C5E;&#x6027;</li>
+</ol>
+<h2 id="&#x6DF1;&#x5165;&#x7406;&#x89E3;javascript&#x539F;&#x578B;&#x548C;&#x95ED;&#x5305;&#xFF08;2&#xFF09;&#x2014;&#x2014;&#x51FD;&#x6570;&#x548C;&#x5BF9;&#x8C61;&#x7684;&#x5173;&#x7CFB;">&#x6DF1;&#x5165;&#x7406;&#x89E3;javascript&#x539F;&#x578B;&#x548C;&#x95ED;&#x5305;&#xFF08;2&#xFF09;&#x2014;&#x2014;&#x51FD;&#x6570;&#x548C;&#x5BF9;&#x8C61;&#x7684;&#x5173;&#x7CFB;</h2>
+<ol>
+<li><p>&#x5BF9;&#x8C61;&#x662F;&#x51FD;&#x6570;&#x521B;&#x5EFA;&#x7684;&#xFF0C;&#x800C;&#x51FD;&#x6570;&#x5374;&#x53C8;&#x662F;&#x4E00;&#x79CD;&#x5BF9;&#x8C61;</p>
+<pre><code> var fn = function () { };
+ console.log(fn instanceof Object);  // true
+ //&#x5BF9;&#x8C61;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x51FD;&#x6570;&#x6765;&#x521B;&#x5EFA;
+ function Fn() {
+             this.name = &apos;&#x738B;&#x798F;&#x670B;&apos;;
+             this.year = 1988;
+         }
+         var fn1 = new Fn();
+</code></pre></li>
+</ol>
+<h2 id="&#x6DF1;&#x5165;&#x7406;&#x89E3;javascript&#x539F;&#x578B;&#x548C;&#x95ED;&#x5305;&#xFF08;3&#xFF09;&#x2014;&#x2014;prototype&#x539F;&#x578B;">&#x6DF1;&#x5165;&#x7406;&#x89E3;javascript&#x539F;&#x578B;&#x548C;&#x95ED;&#x5305;&#xFF08;3&#xFF09;&#x2014;&#x2014;prototype&#x539F;&#x578B;</h2>
+<ol>
+<li>&#x51FD;&#x6570;&#x4E5F;&#x662F;&#x4E00;&#x79CD;&#x5BF9;&#x8C61;&#x3002;&#x4ED6;&#x4E5F;&#x662F;&#x5C5E;&#x6027;&#x7684;&#x96C6;&#x5408;&#xFF0C;&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x5BF9;&#x51FD;&#x6570;&#x8FDB;&#x884C;&#x81EA;&#x5B9A;&#x4E49;&#x5C5E;&#x6027;</li>
+</ol>
+<p>```var obj = {
+        a:10,
+        b:function(x){
+            alert(this.a+x);
+        };
+        c:{
+            name:&apos;&#x738B;&#x798F;&#x670B;&apos;,
+            year:1988
+        }
+    }</p>
+<pre><code>var fn = function () {
+            alert(100);
+        };
+        fn.a = 10;
+        fn.b = function () {
+            alert(123);
+        };
+        fn.c = {
+            name: &quot;&#x738B;&#x798F;&#x670B;&quot;,
+            year: 1988
+        };
+</code></pre><pre><code>
+2. js&#x5C31;&#x9ED8;&#x8BA4;&#x7684;&#x7ED9;&#x51FD;&#x6570;&#x4E00;&#x4E2A;&#x5C5E;&#x6027;&#x2014;&#x2014;prototype&#x3002;&#x5BF9;&#xFF0C;&#x6BCF;&#x4E2A;&#x51FD;&#x6570;&#x90FD;&#x6709;&#x4E00;&#x4E2A;&#x5C5E;&#x6027;&#x53EB;&#x505A;prototype&#x3002;
+&gt; &#x6BCF;&#x4E2A;&#x51FD;&#x6570;&#x90FD;&#x6709;&#x4E00;&#x4E2A;&#x5C5E;&#x6027;&#x53EB;&#x505A;prototype&#x3002;&#x8FD9;&#x4E2A;prototype&#x7684;&#x5C5E;&#x6027;&#x503C;&#x662F;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF08;&#x5C5E;&#x6027;&#x7684;&#x96C6;&#x5408;&#xFF0C;&#x518D;&#x6B21;&#x5F3A;&#x8C03;&#xFF01;&#xFF09;&#xFF0C;&#x9ED8;&#x8BA4;&#x7684;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x53EB;&#x505A;constructor&#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x6307;&#x5411;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x672C;&#x8EAB;&#x3002;
+
+![prototype1](../../../image/closure/prototype1.png)
+ &#x5982;&#x4E0A;&#x56FE;&#xFF0C;SuperType&#x662F;&#x662F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x53F3;&#x4FA7;&#x7684;&#x65B9;&#x6846;&#x5C31;&#x662F;&#x5B83;&#x7684;&#x539F;&#x578B;&#x3002;
+
+3. &#x539F;&#x578B;&#x65E2;&#x7136;&#x4F5C;&#x4E3A;&#x5BF9;&#x8C61;&#xFF0C;&#x5C5E;&#x6027;&#x7684;&#x96C6;&#x5408;&#xFF0C;&#x4E0D;&#x53EF;&#x80FD;&#x5C31;&#x53EA;&#x5F04;&#x4E2A;constructor&#x6765;&#x73A9;&#x73A9;&#xFF0C;&#x80AF;&#x5B9A;&#x53EF;&#x4EE5;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x589E;&#x52A0;&#x8BB8;&#x591A;&#x5C5E;&#x6027;&#x3002;&#x4F8B;&#x5982;&#x8FD9;&#x4F4D;Object&#x5927;&#x54E5;&#xFF0C;&#x4EBA;&#x5BB6;&#x7684;prototype&#x91CC;&#x9762;&#xFF0C;&#x5C31;&#x6709;&#x597D;&#x51E0;&#x4E2A;&#x5176;&#x4ED6;&#x5C5E;&#x6027;&#x3002;
+
+![prototype1](../../../image/closure/prototype2.png)
+
+&gt;&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x5728;&#x81EA;&#x5DF1;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x65B9;&#x6CD5;&#x7684;prototype&#x4E2D;&#x65B0;&#x589E;&#x81EA;&#x5DF1;&#x7684;&#x5C5E;&#x6027;
+</code></pre><pre><code>function Fn() { }
+        Fn.prototype.name = &apos;&#x738B;&#x798F;&#x670B;&apos;;
+        Fn.prototype.getYear = function () {
+            return 1988;
+        };
+</code></pre><pre><code>
+![prototype1](../../../image/closure/prototype3.png)       
+
+4. &#x4F46;&#x662F;&#xFF0C;&#x8FD9;&#x6837;&#x505A;&#x6709;&#x4F55;&#x7528;&#x5462;&#xFF1F; &#x2014;&#x2014; &#x89E3;&#x51B3;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x54B1;&#x4EEC;&#x8FD8;&#x662F;&#x5148;&#x8BF4;&#x8BF4;jQuery&#x5427;&#x3002;
+</code></pre><pre><code>    var $div = $(&apos;div&apos;);
+    $div.attr(&apos;myName&apos;, &apos;&#x738B;&#x798F;&#x670B;&apos;);
+</code></pre><pre><code>
+- &#x4EE5;&#x4E0A;&#x4EE3;&#x7801;&#x4E2D;&#xFF0C;$(&apos;div&apos;)&#x8FD4;&#x56DE;&#x7684;&#x662F;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x5BF9;&#x8C61;&#x2014;&#x2014;&#x88AB;&#x51FD;&#x6570;&#x521B;&#x5EFA;&#x7684;&#x3002;&#x5047;&#x8BBE;&#x521B;&#x5EFA;&#x8FD9;&#x4E00;&#x5BF9;&#x8C61;&#x7684;&#x51FD;&#x6570;&#x662F; myjQuery&#x3002;&#x5B83;&#x5176;&#x5B9E;&#x662F;&#x8FD9;&#x6837;&#x5B9E;&#x73B0;&#x7684;&#x3002;&lt;br&gt;
+</code></pre><pre><code>     myjQuery.prototype.attr = function () {
+     //&#x2026;&#x2026;
+    };
+    $(&apos;div&apos;) = new myjQuery();
+</code></pre><pre><code>
+&gt; &#x5373;&#xFF0C;Fn&#x662F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;fn&#x5BF9;&#x8C61;&#x662F;&#x4ECE;Fn&#x51FD;&#x6570;new&#x51FA;&#x6765;&#x7684;&#xFF0C;&#x8FD9;&#x6837;fn&#x5BF9;&#x8C61;&#x5C31;&#x53EF;&#x4EE5;&#x8C03;&#x7528;Fn.prototype&#x4E2D;&#x7684;&#x5C5E;&#x6027;&#x3002;
+</code></pre><pre><code>     function Fn() { }
+    Fn.prototype.name = &apos;&#x738B;&#x798F;&#x670B;&apos;;
+    Fn.prototype.getYear = function () {
+        return 1988;
+    };
+
+    var fn = new Fn();
+    console.log(fn.name);
+    console.log(fn.getYear());
+</code></pre><pre><code>&gt;&#x56E0;&#x4E3A;&#x6BCF;&#x4E2A;&#x5BF9;&#x8C61;&#x90FD;&#x6709;&#x4E00;&#x4E2A;&#x9690;&#x85CF;&#x7684;&#x5C5E;&#x6027;&#x2014;&#x2014;&#x201C;__proto__&#x201D;&#xFF0C;&#x8FD9;&#x4E2A; &#x5C5E; &#x6027;&#x5F15;&#x7528;&#x4E86;&#x521B;&#x5EFA;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x7684;&#x51FD;&#x6570;&#x7684;prototype&#x3002;&#x5373;&#xFF1A;   fn.__proto__ === Fn.prototype
+ &#x8FD9;&#x91CC;&#x7684;&quot;__proto__&quot;&#x6210;&#x4E3A;&#x201C;&#x9690;&#x5F0F;&#x539F;&#x578B;&#x201D;        
+
+### &#x6DF1;&#x5165;&#x7406;&#x89E3;javascript&#x539F;&#x578B;&#x548C;&#x95ED;&#x5305;&#xFF08;4&#xFF09;&#x2014;&#x2014;&#x9690;&#x5F0F;&#x539F;&#x578B;
+
+&gt;obj.__proto__&#x548C;Object.prototype
+
+ &#x6BCF;&#x4E2A;&#x51FD;&#x6570;function&#x90FD;&#x6709;&#x4E00;&#x4E2A;prototype&#xFF0C;&#x5373;&#x539F;&#x578B;&#x3002;&#x8FD9;&#x91CC;&#x518D;&#x52A0;&#x4E00;&#x53E5;&#x8BDD;&#x2014;&#x2014;&#x6BCF;&#x4E2A;&#x5BF9;&#x8C61;&#x90FD;&#x6709;&#x4E00;&#x4E2A;__proto__&#xFF0C;&#x53EF;&#x6210;&#x4E3A;&#x9690;&#x5F0F;&#x539F;&#x578B;&#x3002;
+</code></pre><pre><code> var obj = {}&apos;
+ console.log(obj.__proto__);
+</code></pre><pre><code>
+![prototype1](../../../image/closure/prototype4.png) 
+ **obj.__proto__&#x548C;Object.prototype&#x7684;&#x5C5E;&#x6027;&#x4E00;&#x6837;**
+
+ obj&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x672C;&#x8D28;&#x4E0A;&#x662F;&#x88AB;Object&#x51FD;&#x6570;&#x521B;&#x5EFA;&#x7684;&#xFF0C;&#x56E0;&#x6B64;obj.__proto__=== Object.prototype&#x3002;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x7528;&#x4E00;&#x4E2A;&#x56FE;&#x6765;&#x8868;&#x793A;&#x3002;
+![prototype1](../../../image/closure/prototype5.png) 
+ **&#x5373;&#xFF0C;&#x6BCF;&#x4E2A;&#x5BF9;&#x8C61;&#x90FD;&#x6709;&#x4E00;&#x4E2A;__proto__&#x5C5E;&#x6027;&#xFF0C;&#x6307;&#x5411;&#x521B;&#x5EFA;&#x8BE5;&#x5BF9;&#x8C61;&#x7684;&#x51FD;&#x6570;&#x7684;prototype**
+
+
+&gt;&#x90A3;&#x4E48;&#x4E0A;&#x56FE;&#x4E2D;&#x7684;&#x201C;Object prototype&#x201D;&#x4E5F;&#x662F;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x5B83;&#x7684;__proto__&#x6307;&#x5411;&#x54EA;&#x91CC;&#xFF1F;
+
+ &#x5728;&#x8BF4;&#x660E;&#x201C;Object prototype&#x201D;&#x4E4B;&#x524D;&#xFF0C;&#x5148;&#x8BF4;&#x4E00;&#x4E0B;&#x81EA;&#x5B9A;&#x4E49;&#x51FD;&#x6570;&#x7684;prototype&#x3002;&#x81EA;&#x5B9A;&#x4E49;&#x51FD;&#x6570;&#x7684;prototype&#x672C;&#x8D28;&#x4E0A;&#x5C31;&#x662F;&#x548C; var obj = {} &#x662F;&#x4E00;&#x6837;&#x7684;&#xFF0C;&#x90FD;&#x662F;&#x88AB;Object&#x521B;&#x5EFA;&#xFF0C;&#x6240;&#x4EE5;&#x5B83;&#x7684;__proto__&#x6307;&#x5411;&#x7684;&#x5C31;&#x662F;Object.prototype&#x3002;
+
+ **&#x4F46;&#x662F;Object.prototype&#x786E;&#x5B9E;&#x4E00;&#x4E2A;&#x7279;&#x4F8B;&#x2014;&#x2014;&#x5B83;&#x7684;__proto__&#x6307;&#x5411;&#x7684;&#x662F;null&#xFF0C;&#x5207;&#x8BB0;&#x5207;&#x8BB0;&#xFF01;**
+![prototype1](../../../image/closure/prototype6.png)
+
+&gt;&#x51FD;&#x6570;&#x4E5F;&#x662F;&#x4E00;&#x79CD;&#x5BF9;&#x8C61;&#xFF0C;&#x51FD;&#x6570;&#x4E5F;&#x6709;__proto__&#x5417;
+ &#x53C8;&#x4E00;&#x4E2A;&#x597D;&#x95EE;&#x9898;&#xFF01;&#x2014;&#x2014;&#x5F53;&#x7136;&#x6709;&#x3002;
+
+ &#x51FD;&#x6570;&#x4E5F;&#x4E0D;&#x662F;&#x4ECE;&#x77F3;&#x5934;&#x7F1D;&#x91CC;&#x8E66;&#x51FA;&#x6765;&#x7684;&#xFF0C;&#x51FD;&#x6570;&#x4E5F;&#x662F;&#x88AB;&#x521B;&#x5EFA;&#x51FA;&#x6765;&#x7684;&#x3002;&#x8C01;&#x521B;&#x5EFA;&#x4E86;&#x51FD;&#x6570;&#x5462;&#xFF1F;&#x2014;&#x2014;Function&#x2014;&#x2014;&#x6CE8;&#x610F;&#x8FD9;&#x4E2A;&#x5927;&#x5199;&#x7684;&#x201C;F&#x201D;&#x3002;
+
+ &#x4E14;&#x770B;&#x5982;&#x4E0B;&#x4EE3;&#x7801;&#x3002;
+</code></pre><p> function fn(x,y){
+     return x+y;
+ }
+ console.log(fn(10,20));
+ var fn1 = new Function(&quot;x&quot;,&quot;y&quot;,&quot;return x + y;&quot;);
+ console.log(fn1(5,6));</p>
+<pre><code> &#x9996;&#x5148;&#x6839;&#x672C;&#x4E0D;&#x63A8;&#x8350;&#x7528;&#x7B2C;&#x4E8C;&#x79CD;&#x65B9;&#x5F0F;&#x3002;
+
+&gt;&#x6839;&#x636E;&#x4E0A;&#x9762;&#x8BF4;&#x7684;&#x4E00;&#x53E5;&#x8BDD;&#x2014;&#x2014;&#x5BF9;&#x8C61;&#x7684;__proto__&#x6307;&#x5411;&#x7684;&#x662F;&#x521B;&#x5EFA;&#x5B83;&#x7684;&#x51FD;&#x6570;&#x7684;prototype&#xFF0C;&#x5C31;&#x4F1A;&#x51FA;&#x73B0;&#xFF1A;Object.__proto__ === Function.prototype&#x3002;&#x7528;&#x4E00;&#x4E2A;&#x56FE;&#x6765;&#x8868;&#x793A;&#x3002;
+
+ **&#x4F46;&#x662F;Object.prototype&#x786E;&#x5B9E;&#x4E00;&#x4E2A;&#x7279;&#x4F8B;&#x2014;&#x2014;&#x5B83;&#x7684;__proto__&#x6307;&#x5411;&#x7684;&#x662F;null&#xFF0C;&#x5207;&#x8BB0;&#x5207;&#x8BB0;&#xFF01;**
+![prototype1](../../../image/closure/prototype7.png)
+
+ &#x4E0A;&#x56FE;&#x4E2D;&#xFF0C;&#x5F88;&#x660E;&#x663E;&#x7684;&#x6807;&#x51FA;&#x4E86;&#xFF1A;&#x81EA;&#x5B9A;&#x4E49;&#x51FD;&#x6570;Foo.__proto__&#x6307;&#x5411;Function.prototype&#xFF0C;Object.__proto__&#x6307;&#x5411;Function.prototype&#xFF0C;&#x5509;&#xFF0C;&#x600E;&#x4E48;&#x8FD8;&#x6709;&#x4E00;&#x4E2A;&#x2026;&#x2026;Function.__proto__&#x6307;&#x5411;Function.prototype&#xFF1F;&#x8FD9;&#x4E0D;&#x6210;&#x4E86;&#x5FAA;&#x73AF;&#x5F15;&#x7528;&#x4E86;&#xFF1F;
+
+ &#x5BF9;&#xFF01;&#x662F;&#x4E00;&#x4E2A;&#x73AF;&#x5F62;&#x7ED3;&#x6784;&#x3002;
+
+ &#x5176;&#x5B9E;&#x7A0D;&#x5FAE;&#x60F3;&#x4E00;&#x4E0B;&#x5C31;&#x660E;&#x767D;&#x4E86;&#x3002;Function&#x4E5F;&#x662F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x51FD;&#x6570;&#x662F;&#x4E00;&#x79CD;&#x5BF9;&#x8C61;&#xFF0C;&#x4E5F;&#x6709;__proto__&#x5C5E;&#x6027;&#x3002;&#x65E2;&#x7136;&#x662F;&#x51FD;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#x5B83;&#x4E00;&#x5B9A;&#x662F;&#x88AB;Function&#x521B;&#x5EFA;&#x3002;&#x6240;&#x4EE5;&#x2014;&#x2014;Function&#x662F;&#x88AB;&#x81EA;&#x8EAB;&#x521B;&#x5EFA;&#x7684;&#x3002;&#x6240;&#x4EE5;&#x5B83;&#x7684;__proto__&#x6307;&#x5411;&#x4E86;&#x81EA;&#x8EAB;&#x7684;Prototype&#x3002;
+
+ &gt;Function.prototype&#x6307;&#x5411;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x5B83;&#x7684;__proto__&#x662F;&#x4E0D;&#x662F;&#x4E5F;&#x6307;&#x5411;Object.prototype&#xFF1F;
+
+
+ &#x7B54;&#x6848;&#x662F;&#x80AF;&#x5B9A;&#x7684;&#x3002;&#x56E0;&#x4E3A;Function.prototype&#x6307;&#x5411;&#x7684;&#x5BF9;&#x8C61;&#x4E5F;&#x662F;&#x4E00;&#x4E2A;&#x666E;&#x901A;&#x7684;&#x88AB;Object&#x521B;&#x5EFA;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x6240;&#x4EE5;&#x4E5F;&#x9075;&#x5FAA;&#x57FA;&#x672C;&#x7684;&#x89C4;&#x5219;&#x3002;
+![prototype](../../../image/closure/prototype8.png)
+
+ ### &#x6DF1;&#x5165;&#x7406;&#x89E3;javascript&#x539F;&#x578B;&#x548C;&#x95ED;&#x5305;&#xFF08;5&#xFF09;&#x2014;&#x2014;instanceof
+
+&gt;&#x5BF9;&#x4E8E;&#x503C;&#x7C7B;&#x578B;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;typeof&#x5224;&#x65AD;&#xFF0C;string/number/boolean&#x90FD;&#x5F88;&#x6E05;&#x695A;&#xFF0C;&#x4F46;&#x662F;typeof&#x5728;&#x5224;&#x65AD;&#x5230;&#x5F15;&#x7528;&#x7C7B;&#x578B;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x8FD4;&#x56DE;&#x503C;&#x53EA;&#x6709;object/function&#xFF0C;&#x4F60;&#x4E0D;&#x77E5;&#x9053;&#x5B83;&#x5230;&#x5E95;&#x662F;&#x4E00;&#x4E2A;object&#x5BF9;&#x8C61;&#xFF0C;&#x8FD8;&#x662F;&#x6570;&#x7EC4;&#xFF0C;&#x8FD8;&#x662F;new Number&#x7B49;&#x7B49;&#x3002;
+
+ &#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x5C31;&#x9700;&#x8981;&#x7528;&#x5230; `instanceof`&#x3002;&#x4F8B;&#x5982;&#xFF1A;
+</code></pre><p> function Foo(){}
+ var f1 = new Foo();</p>
+<p> console.log(f1 instanceof Foo);//true
+ console.log(f1 instanceof Object);//true</p>
+<pre><code> &#x4E0A;&#x56FE;&#x4E2D;&#xFF0C;f1&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x662F;&#x88AB;Foo&#x521B;&#x5EFA;&#xFF0C;&#x4F46;&#x662F;&#x201C;f1 instanceof Object&#x201D;&#x4E3A;&#x4EC0;&#x4E48;&#x662F;true&#x5462;&#xFF1F;
+
+ &#x81F3;&#x4E8E;&#x4E3A;&#x4EC0;&#x4E48;&#x8FC7;&#x4F1A;&#x513F;&#x518D;&#x8BF4;&#xFF0C;&#x5148;&#x628A;instanceof&#x5224;&#x65AD;&#x7684;&#x89C4;&#x5219;&#x544A;&#x8BC9;&#x5927;&#x5BB6;&#x3002;&#x6839;&#x636E;&#x4EE5;&#x4E0A;&#x4EE3;&#x7801;&#x770B;&#x4E0B;&#x56FE;&#xFF1A;
+
+![prototype](../../../image/closure/prototype9.png)
+
+ Instanceof&#x8FD0;&#x7B97;&#x7B26;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x53D8;&#x91CF;&#x662F;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x6682;&#x65F6;&#x79F0;&#x4E3A;A&#xFF1B;&#x7B2C;&#x4E8C;&#x4E2A;&#x53D8;&#x91CF;&#x4E00;&#x822C;&#x662F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x6682;&#x65F6;&#x79F0;&#x4E3A;B
+
+ **Instanceof&#x7684;&#x5224;&#x65AD;&#x961F;&#x5219;&#x662F;&#xFF1A;&#x6CBF;&#x7740;A&#x7684;__proto__&#x8FD9;&#x6761;&#x7EBF;&#x6765;&#x627E;&#xFF0C;&#x540C;&#x65F6;&#x6CBF;&#x7740;B&#x7684;prototype&#x8FD9;&#x6761;&#x7EBF;&#x6765;&#x627E;&#xFF0C;&#x5982;&#x679C;&#x4E24;&#x6761;&#x7EBF;&#x80FD;&#x627E;&#x5230;&#x540C;&#x4E00;&#x4E2A;&#x5F15;&#x7528;&#xFF0C;&#x5373;&#x540C;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x8FD4;&#x56DE;true&#x3002;&#x5982;&#x679C;&#x627E;&#x5230;&#x7EC8;&#x70B9;&#x8FD8;&#x672A;&#x91CD;&#x5408;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;false&#x3002;**
+
+ &#x6309;&#x7167;&#x4EE5;&#x4E0A;&#x89C4;&#x5219;&#xFF0C;&#x5927;&#x5BB6;&#x770B;&#x770B;&#x201C; f1 instanceof Object &#x201D;&#x8FD9;&#x53E5;&#x4EE3;&#x7801;&#x662F;&#x4E0D;&#x662F;true&#xFF1F; &#x6839;&#x636E;&#x4E0A;&#x56FE;&#x5F88;&#x5BB9;&#x6613;&#x5C31;&#x80FD;&#x770B;&#x51FA;&#x6765;&#xFF0C;&#x5C31;&#x662F;true&#x3002;
+
+ &#x56E0;&#x6B64;&#xFF1A;
+</code></pre><p> console.log(Object instanceof Function) //true
+ console.log(Fuction instanceof Object) //true
+ console.log(Function instanceof Function) //true</p>
+<pre><code>![prototype](../../../image/closure/prototype10.png)
+
+
+&gt;instanceof&#x8FD9;&#x6837;&#x8BBE;&#x8BA1;&#xFF0C;&#x5230;&#x5E95;&#x6709;&#x4EC0;&#x4E48;&#x7528;&#xFF1F;
+**&#x91CD;&#x70B9;&#x5C31;&#x8FD9;&#x6837;&#x88AB;&#x8FD9;&#x4F4D;&#x8001;&#x670B;&#x53CB;&#x7ED9;&#x5F15;&#x51FA;&#x6765;&#x4E86;&#x2014;&#x2014;&#x7EE7;&#x627F;&#x2014;&#x2014;&#x539F;&#x578B;&#x94FE;&#x3002;**
+
+**&#x5373;&#xFF0C;instanceof&#x8868;&#x793A;&#x7684;&#x5C31;&#x662F;&#x4E00;&#x79CD;&#x7EE7;&#x627F;&#x5173;&#x7CFB;&#xFF0C;&#x6216;&#x8005;&#x539F;&#x578B;&#x94FE;&#x7684;&#x7ED3;&#x6784;&#x3002;**
+
+ ### &#x6DF1;&#x5165;&#x7406;&#x89E3;javascript&#x539F;&#x578B;&#x548C;&#x95ED;&#x5305;&#xFF08;6&#xFF09;&#x2014;&#x2014;&#x7EE7;&#x627F;
+
+&gt;javascript&#x4E2D;&#x7684;&#x7EE7;&#x627F;&#x662F;&#x901A;&#x8FC7;&#x539F;&#x578B;&#x94FE;&#x6765;&#x4F53;&#x73B0;&#x7684;&#x3002;&#x5148;&#x770B;&#x51E0;&#x53E5;&#x4EE3;&#x7801;
+</code></pre><p> fuction Foo(){}
+ var f1 = new Foo();
+ f1.a = 10;
+ Foo.prototype.a = 100;
+ Foo.prototype.b = 200;
+ console.log(f1.a); //10
+ console.log(f1.b); //200</p>
+<pre><code> &#x4EE5;&#x4E0A;&#x4EE3;&#x7801;&#x4E2D;&#xFF0C;f1&#x662F;Foo&#x51FD;&#x6570;new&#x51FA;&#x6765;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;f1.a&#x662F;f1&#x5BF9;&#x8C61;&#x7684;&#x57FA;&#x672C;&#x5C5E;&#x6027;&#xFF0C;f1.b&#x662F;&#x600E;&#x4E48;&#x6765;&#x7684;&#x5462;&#xFF1F;&#x2014;&#x2014;&#x4ECE;Foo.prototype&#x5F97;&#x6765;&#xFF0C;&#x56E0;&#x4E3A;f1.__proto__&#x6307;&#x5411;&#x7684;&#x662F;Foo.prototype
+
+ **&#x8BBF;&#x95EE;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x7684;&#x5C5E;&#x6027;&#x65F6;&#xFF0C;&#x5148;&#x5728;&#x57FA;&#x672C;&#x5C5E;&#x6027;&#x4E2D;&#x67E5;&#x627E;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#xFF0C;&#x518D;&#x6CBF;&#x7740;__proto__&#x8FD9;&#x6761;&#x94FE;&#x5411;&#x4E0A;&#x627E;&#xFF0C;&#x8FD9;&#x5C31;&#x662F;&#x539F;&#x578B;&#x94FE;&#x3002;**
+![prototype](../../../image/closure/prototype11.png)
+
+ &gt;&#x90A3;&#x4E48;&#x6211;&#x4EEC;&#x5728;&#x5B9E;&#x9645;&#x5E94;&#x7528;&#x4E2D;&#x5982;&#x4F55;&#x533A;&#x5206;&#x4E00;&#x4E2A;&#x5C5E;&#x6027;&#x5230;&#x5E95;&#x662F;&#x57FA;&#x672C;&#x7684;&#x8FD8;&#x662F;&#x4ECE;&#x539F;&#x578B;&#x4E2D;&#x627E;&#x5230;&#x7684;&#x5462;&#xFF1F;&#x5927;&#x5BB6;&#x53EF;&#x80FD;&#x90FD;&#x77E5;&#x9053;&#x7B54;&#x6848;&#x4E86;&#x2014;&#x2014;hasOwnProperty&#xFF0C;&#x7279;&#x522B;&#x662F;&#x5728;for&#x2026;in&#x2026;&#x5FAA;&#x73AF;&#x4E2D;&#xFF0C;&#x4E00;&#x5B9A;&#x8981;&#x6CE8;&#x610F;&#x3002;
+
+![prototype](../../../image/closure/prototype12.png)
+
+&gt;   f1&#x7684;&#x8FD9;&#x4E2A;hasOwnProperty&#x65B9;&#x6CD5;&#x662F;&#x4ECE;&#x54EA;&#x91CC;&#x6765;&#x7684;&#xFF1F; f1&#x672C;&#x8EAB;&#x6CA1;&#x6709;&#xFF0C;Foo.prototype&#x4E2D;&#x4E5F;&#x6CA1;&#x6709;&#xFF0C;&#x54EA;&#x513F;&#x6765;&#x7684;&#xFF1F;
+
+ &#x597D;&#x95EE;&#x9898;&#x3002;
+
+ &#x5B83;&#x662F;&#x4ECE;Object.prototype&#x4E2D;&#x6765;&#x7684;&#xFF0C;&#x8BF7;&#x770B;&#x56FE;
+
+![prototype](../../../image/closure/prototype13.png)
+
+**&#x5BF9;&#x8C61;&#x7684;&#x539F;&#x578B;&#x94FE;&#x662F;&#x6CBF;&#x7740;__proto__&#x8FD9;&#x6761;&#x7EBF;&#x8D70;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x5728;&#x67E5;&#x627E;f1.hasOwnProperty&#x5C5E;&#x6027;&#x65F6;&#xFF0C;&#x5C31;&#x4F1A;&#x987A;&#x7740;&#x539F;&#x578B;&#x94FE;&#x4E00;&#x76F4;&#x67E5;&#x627E;&#x5230;Object.prototype&#x3002;**
+
+**&#x7531;&#x4E8E;&#x6240;&#x6709;&#x7684;&#x5BF9;&#x8C61;&#x7684;&#x539F;&#x578B;&#x94FE;&#x90FD;&#x4F1A;&#x627E;&#x5230;Object.prototype&#xFF0C;&#x56E0;&#x6B64;&#x6240;&#x6709;&#x7684;&#x5BF9;&#x8C61;&#x90FD;&#x4F1A;&#x6709;Object.prototype&#x7684;&#x65B9;&#x6CD5;&#x3002;&#x8FD9;&#x5C31;&#x662F;&#x6240;&#x8C13;&#x7684;&#x201C;&#x7EE7;&#x627F;&#x201D;&#x3002;**
+
+&gt;&#x4F60;&#x53EF;&#x4EE5;&#x81EA;&#x5B9A;&#x4E49;&#x51FD;&#x6570;&#x548C;&#x5BF9;&#x8C61;&#x6765;&#x5B9E;&#x73B0;&#x81EA;&#x5DF1;&#x7684;&#x7EE7;&#x627F;&#x3002;
+
+ &#x8BF4;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x7684;&#x4F8B;&#x5B50;&#x5427;&#x3002;
+
+ &#x6211;&#x4EEC;&#x90FD;&#x77E5;&#x9053;&#x6BCF;&#x4E2A;&#x51FD;&#x6570;&#x90FD;&#x6709;call&#xFF0C;apply&#x65B9;&#x6CD5;&#xFF0C;&#x90FD;&#x6709;length&#xFF0C;arguments&#xFF0C;caller&#x7B49;&#x5C5E;&#x6027;&#x3002;&#x4E3A;&#x4EC0;&#x4E48;&#x6BCF;&#x4E2A;&#x51FD;&#x6570;&#x90FD;&#x6709;&#xFF1F;&#x8FD9;&#x80AF;&#x5B9A;&#x662F;&#x201C;&#x7EE7;&#x627F;&#x201D;&#x7684;&#x3002;&#x51FD;&#x6570;&#x7531;Function&#x51FD;&#x6570;&#x521B;&#x5EFA;&#xFF0C;&#x56E0;&#x6B64;&#x7EE7;&#x627F;&#x7684;Function.prototype&#x4E2D;&#x7684;&#x65B9;&#x6CD5;&#x3002;&#x4E0D;&#x4FE1;&#x53EF;&#x4EE5;&#x8BF7;&#x5FAE;&#x8F6F;&#x7684;Visual Studio&#x8001;&#x5E08;&#x7ED9;&#x6211;&#x4EEC;&#x9A8C;&#x8BC1;&#x4E00;&#x4E0B;&#xFF1A;
+
+![prototype](../../../image/closure/prototype14.png)
+
+ &#x770B;&#x5230;&#x4E86;&#x5427;&#xFF0C;&#x6709;call&#x3001;length&#x7B49;&#x8FD9;&#x4E9B;&#x5C5E;&#x6027;&#x3002;
+
+ &#x90A3;&#x600E;&#x4E48;&#x8FD8;&#x6709;hasOwnProperty&#x5462;&#xFF1F;&#x2014;&#x2014;&#x90A3;&#x662F;Function.prototype&#x7EE7;&#x627F;&#x81EA;Object.prototype&#x7684;&#x65B9;&#x6CD5;&#x3002;&#x6709;&#x7591;&#x95EE;&#x53EF;&#x4EE5;&#x770B;&#x770B;&#x4E0A;&#x4E00;&#x8282;&#x5C06;instanceof&#x65F6;&#x5019;&#x90A3;&#x4E2A;&#x5927;&#x56FE;&#xFF0C;&#x770B;&#x770B;Function.prototype.__proto__&#x662F;&#x5426;&#x6307;&#x5411;Object.prototype&#x3002;
+
+
+
+ &#x539F;&#x578B;&#x3001;&#x539F;&#x578B;&#x94FE;&#xFF0C;&#x5927;&#x5BB6;&#x90FD;&#x660E;&#x767D;&#x4E86;&#x5417;&#xFF1F;
+
+ ### &#x6DF1;&#x5165;&#x7406;&#x89E3;javascript&#x539F;&#x578B;&#x548C;&#x95ED;&#x5305;&#xFF08;7&#xFF09;&#x2014;&#x2014;&#x539F;&#x578B;&#x7684;&#x7075;&#x6D3B;&#x6027;
+ &gt;&#x9996;&#x5148;&#xFF0C;&#x5BF9;&#x8C61;&#x5C5E;&#x6027;&#x53EF;&#x4EE5;&#x968F;&#x65F6;&#x6539;&#x52A8;&#x3002;
+
+ &#x5BF9;&#x8C61;&#x6216;&#x8005;&#x51FD;&#x6570;&#xFF0C;&#x521A;&#x5F00;&#x59CB;new&#x51FA;&#x6765;&#x4E4B;&#x540E;&#xFF0C;&#x53EF;&#x80FD;&#x5565;&#x5C5E;&#x6027;&#x90FD;&#x6CA1;&#x6709;&#x3002;&#x4F46;&#x662F;&#x4F60;&#x53EF;&#x4EE5;&#x8FD9;&#x4F1A;&#x513F;&#x52A0;&#x4E00;&#x4E2A;&#xFF0C;&#x8FC7;&#x4E00;&#x4F1A;&#x513F;&#x5728;&#x52A0;&#x4E24;&#x4E2A;&#xFF0C;&#x975E;&#x5E38;&#x7075;&#x6D3B;&#x3002;
+
+ &#x5728;jQuery&#x7684;&#x6E90;&#x7801;&#x4E2D;&#xFF0C;&#x5BF9;&#x8C61;&#x88AB;&#x521B;&#x5EFA;&#x65F6;&#x4EC0;&#x4E48;&#x5C5E;&#x6027;&#x90FD;&#x6CA1;&#x6709;&#xFF0C;&#x90FD;&#x662F;&#x4EE3;&#x7801;&#x4E00;&#x6B65;&#x4E00;&#x6B65;&#x6267;&#x884C;&#x65F6;&#xFF0C;&#x4E00;&#x4E2A;&#x4E00;&#x4E2A;&#x52A0; &#x4E0A;&#x7684;&#x3002;
+
+![prototype](../../../image/closure/prototype15.png)
+
+&gt; &#x5176;&#x6B21;&#xFF0C;&#x5982;&#x679C;&#x7EE7;&#x627F;&#x7684;&#x65B9;&#x6CD5;&#x4E0D;&#x5408;&#x9002;&#xFF0C;&#x53EF;&#x4EE5;&#x505A;&#x51FA;&#x4FEE;&#x6539;&#x3002;
+ &#x540C;&#x7406;&#xFF0C;&#x6211;&#x4E5F;&#x53EF;&#x4EE5;&#x81EA;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x5E76;&#x81EA;&#x5DF1;&#x53BB;&#x4FEE;&#x6539;`prototype.toString()`&#x65B9;&#x6CD5;&#x3002;
+![prototype](../../../image/closure/prototype16.png) 
+&gt;&#x6700;&#x540E;&#xFF0C;&#x5982;&#x679C;&#x611F;&#x89C9;&#x5F53;&#x524D;&#x7F3A;&#x5C11;&#x4F60;&#x8981;&#x7528;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x53EF;&#x4EE5;&#x81EA;&#x5DF1;&#x53BB;&#x521B;&#x5EFA;
+![prototype](../../../image/closure/prototype17.png) 
+
+**&#x5982;&#x679C;&#x4F60;&#x8981;&#x6DFB;&#x52A0;&#x5185;&#x7F6E;&#x65B9;&#x6CD5;&#x7684;&#x539F;&#x578B;&#x5C5E;&#x6027;&#xFF0C;&#x6700;&#x597D;&#x505A;&#x4E00;&#x6B65;&#x5224;&#x65AD;&#xFF0C;&#x5982;&#x679C;&#x8BE5;&#x5C5E;&#x6027;&#x4E0D;&#x5B58;&#x5728;&#xFF0C;&#x5219;&#x6DFB;&#x52A0;&#x3002;&#x5982;&#x679C;&#x672C;&#x6765;&#x5C31;&#x5B58;&#x5728;&#xFF0C;&#x5C31;&#x6CA1;&#x5FC5;&#x8981;&#x518D;&#x6DFB;&#x52A0;&#x4E86;**
+
+### &#x6DF1;&#x5165;&#x7406;&#x89E3;javascript&#x539F;&#x578B;&#x548C;&#x95ED;&#x5305;&#xFF08;8&#xFF09;&#x2014;&#x2014;&#x7B80;&#x8FF0;&#x3010;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x3011;&#x4E0A;
+**&#x4EC0;&#x4E48;&#x662F;&#x201C;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x201D;**
+![prototype](../../../image/closure/prototype18.png)
+ &#x7B2C;&#x4E00;&#x53E5;&#x62A5;&#x9519;&#xFF0C;a&#x672A;&#x5B9A;&#x4E49;&#xFF0C;&#x5F88;&#x6B63;&#x5E38;&#x3002;&#x7B2C;&#x4E8C;&#x53E5;&#x3001;&#x7B2C;&#x4E09;&#x53E5;&#x8F93;&#x51FA;&#x90FD;&#x662F;undefined&#xFF0C;&#x8BF4;&#x660E;&#x6D4F;&#x89C8;&#x5668;&#x5728;&#x6267;&#x884C;console.log(a)&#x65F6;&#xFF0C;&#x5DF2;&#x7ECF;&#x77E5;&#x9053;&#x4E86;a&#x662F;undefined&#xFF0C;&#x4F46;&#x5374;&#x4E0D;&#x77E5;&#x9053;a&#x662F;10&#xFF08;&#x7B2C;&#x4E09;&#x53E5;&#x4E2D;&#xFF09;&#x3002;
+
+ &gt;&#x5728;&#x4E00;&#x6BB5;js&#x4EE3;&#x7801;&#x62FF;&#x8FC7;&#x6765;&#x771F;&#x6B63;&#x4E00;&#x53E5;&#x4E00;&#x53E5;&#x8FD0;&#x884C;&#x4E4B;&#x524D;&#xFF0C;&#x6D4F;&#x89C8;&#x5668;&#x5DF2;&#x7ECF;&#x505A;&#x4E86;&#x4E00;&#x4E9B;&#x201C;&#x51C6;&#x5907;&#x5DE5;&#x4F5C;&#x201D;&#xFF0C;&#x5176;&#x4E2D;&#x5C31;&#x5305;&#x62EC;&#x5BF9;&#x53D8;&#x91CF;&#x7684;&#x58F0;&#x660E;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x8D4B;&#x503C;&#x3002;&#x53D8;&#x91CF;&#x8D4B;&#x503C;&#x662F;&#x5728;&#x8D4B;&#x503C;&#x8BED;&#x53E5;&#x6267;&#x884C;&#x7684;&#x65F6;&#x5019;&#x8FDB;&#x884C;&#x7684;&#x3002;&#x53EF;&#x7528;&#x4E0B;&#x56FE;&#x6A21;&#x62DF;&#xFF1A;
+
+![prototype](../../../image/closure/prototype19.png)
+
+&gt;&#x6709;js&#x5F00;&#x53D1;&#x7ECF;&#x9A8C;&#x7684;&#x670B;&#x53CB;&#x5E94;&#x8BE5;&#x90FD;&#x77E5;&#x9053;&#xFF0C;&#x4F60;&#x65E0;&#x8BBA;&#x5728;&#x54EA;&#x4E2A;&#x4F4D;&#x7F6E;&#x83B7;&#x53D6;this&#xFF0C;&#x90FD;&#x662F;&#x6709;&#x503C;&#x7684;&#x3002;&#x81F3;&#x4E8E;this&#x7684;&#x53D6;&#x503C;&#x60C5;&#x51B5;&#xFF0C;&#x6BD4;&#x8F83;&#x590D;&#x6742;&#xFF0C;&#x4F1A;&#x4E13;&#x95E8;&#x62FF;&#x51FA;&#x4E00;&#x7BC7;&#x6587;&#x7AE0;&#x6765;&#x8BB2;&#x89E3;&#x3002;
+
+ &#x4E0E;&#x7B2C;&#x4E00;&#x79CD;&#x60C5;&#x51B5;&#x4E0D;&#x540C;&#x7684;&#x662F;&#xFF1A;&#x7B2C;&#x4E00;&#x79CD;&#x60C5;&#x51B5;&#x53EA;&#x662F;&#x5BF9;&#x53D8;&#x91CF;&#x8FDB;&#x884C;&#x58F0;&#x660E;&#xFF08;&#x5E76;&#x6CA1;&#x6709;&#x8D4B;&#x503C;&#xFF09;&#xFF0C;&#x800C;&#x6B64;&#x79CD;&#x60C5;&#x51B5;&#x76F4;&#x63A5;&#x7ED9;this&#x8D4B;&#x503C;&#x3002;&#x8FD9;&#x4E5F;&#x662F;&#x201C;&#x51C6;&#x5907;&#x5DE5;&#x4F5C;&#x201D;&#x60C5;&#x51B5;&#x8981;&#x505A;&#x7684;&#x4E8B;&#x60C5;&#x4E4B;&#x4E00;&#x3002;
+ &#x4E0B;&#x9762;&#x8FD8;&#x6709;&#x3002;&#x3002;&#x3002;&#x7B2C;&#x4E09;&#x79CD;&#x60C5;&#x51B5;&#x3002;
+&gt;&#x5728;&#x7B2C;&#x4E09;&#x79CD;&#x60C5;&#x51B5;&#x4E2D;&#xFF0C;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x4EE3;&#x7801;&#x6CE8;&#x91CA;&#x4E2D;&#x7684;&#x4E24;&#x4E2A;&#x540D;&#x8BCD;&#x2014;&#x2014;&#x201C;&#x51FD;&#x6570;&#x8868;&#x8FBE;&#x5F0F;&#x201D;&#x548C;&#x201C;&#x51FD;&#x6570;&#x58F0;&#x660E;&#x201D;&#x3002;&#x867D;&#x7136;&#x4E24;&#x8005;&#x90FD;&#x5F88;&#x5E38;&#x7528;&#xFF0C;&#x4F46;&#x662F;&#x8FD9;&#x4E24;&#x8005;&#x5728;&#x201C;&#x51C6;&#x5907;&#x5DE5;&#x4F5C;&#x201D;&#x65F6;&#xFF0C;&#x5374;&#x662F;&#x4E24;&#x79CD;&#x5F85;&#x9047;&#x3002;
+![prototype](../../../image/closure/prototype20.png)
+&#x770B;&#x4EE5;&#x4E0A;&#x4EE3;&#x7801;&#x3002;&#x201C;&#x51FD;&#x6570;&#x58F0;&#x660E;&#x201D;&#x65F6;&#x6211;&#x4EEC;&#x770B;&#x5230;&#x4E86;&#x7B2C;&#x4E8C;&#x79CD;&#x60C5;&#x51B5;&#x7684;&#x5F71;&#x5B50;&#xFF0C;&#x800C;&#x201C;&#x51FD;&#x6570;&#x8868;&#x8FBE;&#x5F0F;&#x201D;&#x65F6;&#x6211;&#x4EEC;&#x770B;&#x5230;&#x4E86;&#x7B2C;&#x4E00;&#x79CD;&#x60C5;&#x51B5;&#x7684;&#x5F71;&#x5B50;&#x3002;
+
+&#x6CA1;&#x9519;&#x3002;&#x5728;&#x201C;&#x51C6;&#x5907;&#x5DE5;&#x4F5C;&#x201D;&#x4E2D;&#xFF0C;&#x5BF9;&#x5F85;&#x51FD;&#x6570;&#x8868;&#x8FBE;&#x5F0F;&#x5C31;&#x50CF;&#x5BF9;&#x5F85;&#x201C; var a = 10 &#x201D;&#x8FD9;&#x6837;&#x7684;&#x53D8;&#x91CF;&#x4E00;&#x6837;&#xFF0C;&#x53EA;&#x662F;&#x58F0;&#x660E;&#x3002;&#x800C;&#x5BF9;&#x5F85;&#x51FD;&#x6570;&#x58F0;&#x660E;&#x65F6;&#xFF0C;&#x5374;&#x628A;&#x51FD;&#x6570;&#x6574;&#x4E2A;&#x8D4B;&#x503C;&#x4E86;&#x3002;
+
+**&#x603B;&#x7ED3;**
+&gt;&#x5728;&#x201C;&#x51C6;&#x5907;&#x5DE5;&#x4F5C;&#x201D;&#x4E2D;&#x5B8C;&#x6210;&#x4E86;&#x54EA;&#x4E9B;&#x5DE5;&#x4F5C;&#xFF1A;
+- &#x53D8;&#x91CF;&#x3001;&#x51FD;&#x6570;&#x8868;&#x8FBE;&#x5F0F;&#x2014;&#x2014;&#x53D8;&#x91CF;&#x58F0;&#x660E;&#xFF0C;&#x9ED8;&#x8BA4;&#x8D4B;&#x503C;&#x4E3A;undefined&#xFF1B;
+- this&#x2014;&#x2014;&#x8D4B;&#x503C;&#xFF1B;
+- &#x51FD;&#x6570;&#x58F0;&#x660E;&#x2014;&#x2014;&#x8D4B;&#x503C;&#xFF1B;
+ &#x8FD9;&#x4E09;&#x79CD;&#x6570;&#x636E;&#x7684;&#x51C6;&#x5907;&#x60C5;&#x51B5;&#x6211;&#x4EEC;&#x79F0;&#x4E4B;&#x4E3A;&#x201C;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x201D;&#x6216;&#x8005;&#x201C;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x201D;&#x3002;
+
+&gt;javascript&#x5728;&#x6267;&#x884C;&#x4E00;&#x4E2A;&#x4EE3;&#x7801;&#x6BB5;&#x4E4B;&#x524D;&#xFF0C;&#x90FD;&#x4F1A;&#x8FDB;&#x884C;&#x8FD9;&#x4E9B;&#x201C;&#x51C6;&#x5907;&#x5DE5;&#x4F5C;&#x201D;&#x6765;&#x751F;&#x6210;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x3002;&#x8FD9;&#x4E2A;&#x201C;&#x4EE3;&#x7801;&#x6BB5;&#x201D;&#x5176;&#x5B9E;&#x5206;&#x4E09;&#x79CD;&#x60C5;&#x51B5;&#x2014;&#x2014;&#x5168;&#x5C40;&#x4EE3;&#x7801;&#xFF0C;&#x51FD;&#x6570;&#x4F53;&#xFF0C;eval&#x4EE3;&#x7801;
+
+- &#x6240;&#x8C13;&#x201C;&#x4EE3;&#x7801;&#x6BB5;&#x201D;&#x5C31;&#x662F;&#x4E00;&#x6BB5;&#x6587;&#x672C;&#x5F62;&#x5F0F;&#x7684;&#x4EE3;&#x7801;&#x3002;
+
+  &lt;script type=&quot;text/javascript&quot;&gt;
+   //&#x4EE3;&#x7801;&#x6BB5;
+  &lt;/script&gt;
+
+-   &#x5176;&#x6B21;&#xFF0C;eval&#x4EE3;&#x7801;&#x63A5;&#x6536;&#x7684;&#x4E5F;&#x662F;&#x4E00;&#x6BB5;&#x6587;&#x672C;&#x5F62;&#x5F0F;&#x7684;&#x4EE3;&#x7801;&#x3002;
+
+ `eval(&quot;alert(123)&quot;);`
+
+- &#x6700;&#x540E;&#xFF0C;&#x51FD;&#x6570;&#x4F53;&#x662F;&#x4EE3;&#x7801;&#x6BB5;&#x662F;&#x56E0;&#x4E3A;&#x51FD;&#x6570;&#x5728;&#x521B;&#x5EFA;&#x65F6;&#xFF0C;&#x672C;&#x8D28;&#x4E0A;&#x662F; new Function(&#x2026;) &#x5F97;&#x6765;&#x7684;&#xFF0C;&#x5176;&#x4E2D;&#x9700;&#x8981;&#x4F20;&#x5165;&#x4E00;&#x4E2A;&#x6587;&#x672C;&#x5F62;&#x5F0F;&#x7684;&#x53C2;&#x6570;&#x4F5C;&#x4E3A;&#x51FD;&#x6570;&#x4F53;&#x3002;
+![prototype](../../../image/closure/prototype21.png) 
+
+### &#x6DF1;&#x5165;&#x7406;&#x89E3;javascript&#x539F;&#x578B;&#x548C;&#x95ED;&#x5305;&#xFF08;9&#xFF09;&#x2014;&#x2014;&#x7B80;&#x8FF0;&#x3010;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x3011;&#x4E0B;
+&gt;&#x4E0A;&#x4E00;&#x7BC7;&#x6211;&#x4EEC;&#x8BB2;&#x5230;&#x5728;&#x5168;&#x5C40;&#x73AF;&#x5883;&#x4E0B;&#x7684;&#x4EE3;&#x7801;&#x6BB5;&#x4E2D;&#xFF0C;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x4E2D;&#x6709;&#x5982;&#x4F55;&#x6570;&#x636E;&#xFF1A;
+
+- &#x53D8;&#x91CF;&#x3001;&#x51FD;&#x6570;&#x8868;&#x8FBE;&#x5F0F;&#x2014;&#x2014;&#x53D8;&#x91CF;&#x58F0;&#x660E;&#xFF0C;&#x9ED8;&#x8BA4;&#x8D4B;&#x503C;&#x4E3A;undefined&#xFF1B;
+- this&#x2014;&#x2014;&#x8D4B;&#x503C;&#xFF1B;
+- &#x51FD;&#x6570;&#x58F0;&#x660E;&#x2014;&#x2014;&#x8D4B;&#x503C;&#xFF1B;
+
+&gt;&#x5982;&#x679C;&#x5728;&#x51FD;&#x6570;&#x4E2D;&#xFF0C;&#x9664;&#x4E86;&#x4EE5;&#x4E0A;&#x6570;&#x636E;&#x4E4B;&#x5916;&#xFF0C;&#x8FD8;&#x4F1A;&#x6709;&#x5176;&#x4ED6;&#x6570;&#x636E;&#x3002;&#x5148;&#x770B;&#x4EE5;&#x4E0B;&#x4EE3;&#x7801;&#xFF1A;
+![prototype](../../../image/closure/prototype22.png)
+&#x4EE5;&#x4E0A;&#x4EE3;&#x7801;&#x5C55;&#x793A;&#x4E86;&#x5728;&#x51FD;&#x6570;&#x4F53;&#x7684;&#x8BED;&#x53E5;&#x6267;&#x884C;&#x4E4B;&#x524D;&#xFF0C;arguments&#x53D8;&#x91CF;&#x548C;&#x51FD;&#x6570;&#x7684;&#x53C2;&#x6570;&#x90FD;&#x5DF2;&#x7ECF;&#x88AB;&#x8D4B;&#x503C;&#x3002;&#x4ECE;&#x8FD9;&#x91CC;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF0C;&#x51FD;&#x6570;&#x6BCF;&#x88AB;&#x8C03;&#x7528;&#x4E00;&#x6B21;&#xFF0C;&#x90FD;&#x4F1A;&#x4EA7;&#x751F;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x3002;&#x56E0;&#x4E3A;&#x4E0D;&#x540C;&#x7684;&#x8C03;&#x7528;&#x53EF;&#x80FD;&#x5C31;&#x4F1A;&#x6709;&#x4E0D;&#x540C;&#x7684;&#x53C2;&#x6570;&#x3002;
+
+&gt;&#x53E6;&#x5916;&#x4E00;&#x70B9;&#x4E0D;&#x540C;&#x5728;&#x4E8E;&#xFF0C;&#x51FD;&#x6570;&#x5728;&#x5B9A;&#x4E49;&#x7684;&#x65F6;&#x5019;&#xFF08;&#x4E0D;&#x662F;&#x8C03;&#x7528;&#x7684;&#x65F6;&#x5019;&#xFF09;&#xFF0C;&#x5C31;&#x5DF2;&#x7ECF;&#x786E;&#x5B9A;&#x4E86;&#x51FD;&#x6570;&#x4F53;&#x5185;&#x90E8;&#x81EA;&#x7531;&#x53D8;&#x91CF;&#x7684;&#x4F5C;&#x7528;&#x57DF;&#x3002;&#x81F3;&#x4E8E;&#x201C;&#x81EA;&#x7531;&#x53D8;&#x91CF;&#x201D;&#x548C;&#x201C;&#x4F5C;&#x7528;&#x57DF;&#x201D;&#x662F;&#x540E;&#x9762;&#x8981;&#x4E13;&#x95E8;&#x62FF;&#x51FA;&#x6765;&#x8BB2;&#x8FF0;&#x7684;&#x91CD;&#x70B9;&#xFF0C;&#x8FD9;&#x91CC;&#x5C31;&#x5148;&#x70B9;&#x5230;&#x4E3A;&#x6B62;&#x3002;&#x7528;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#x8BF4;&#x660E;&#x4E00;&#x4E0B;&#xFF1A;
+![prototype](../../../image/closure/prototype23.png)
+**f() --&gt; fn()**
+**&#x51FD;&#x6570;&#x521B;&#x5EFA;&#x65F6;&#x5019;&#x5DF2;&#x7ECF;&#x786E;&#x5B9A;&#x4E86;&#x8981;&#x6253;&#x5370;&#x7684;fn()&#x7684;&#x503C;&#xFF0C;&#x51FD;&#x6570;&#x58F0;&#x660E;**
+
+&gt;&#x597D;&#x4E86;&#xFF0C;&#x603B;&#x7ED3;&#x5B8C;&#x4E86;&#x51FD;&#x6570;&#x7684;&#x9644;&#x52A0;&#x5185;&#x5BB9;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x6B64;&#x8981;&#x5168;&#x9762;&#x603B;&#x7ED3;&#x4E00;&#x4E0B;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x7684;&#x6570;&#x636E;&#x5185;&#x5BB9;&#x3002;
+&#x5168;&#x5C40;&#x4EE3;&#x7801;&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x6570;&#x636E;&#x5185;&#x5BB9;&#x4E3A;&#xFF1A;
+![prototype](../../../image/closure/prototype24.png)
+
+**&#x7ED9;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x4E0B;&#x4E00;&#x4E2A;&#x901A;&#x4FD7;&#x7684;&#x5B9A;&#x4E49;&#x2014;&#x2014;&#x5728;&#x6267;&#x884C;&#x4EE3;&#x7801;&#x4E4B;&#x524D;&#xFF0C;&#x628A;&#x5C06;&#x8981;&#x7528;&#x5230;&#x7684;&#x6240;&#x6709;&#x7684;&#x53D8;&#x91CF;&#x90FD;&#x4E8B;&#x5148;&#x62FF;&#x51FA;&#x6765;&#xFF0C;&#x6709;&#x7684;&#x76F4;&#x63A5;&#x8D4B;&#x503C;&#x4E86;&#xFF0C;&#x6709;&#x7684;&#x5148;&#x7528;undefined&#x5360;&#x4E2A;&#x7A7A;&#x3002;**
+
+### &#x6DF1;&#x5165;&#x7406;&#x89E3;javascript&#x539F;&#x578B;&#x548C;&#x95ED;&#x5305;&#xFF08;10&#xFF09;&#x2014;&#x2014;this
+
+**&#x5176;&#x5B9E;&#xFF0C;this&#x7684;&#x53D6;&#x503C;&#xFF0C;&#x5206;&#x56DB;&#x79CD;&#x60C5;&#x51B5;&#x3002;&#x6211;&#x4EEC;&#x6765;&#x6328;&#x4E2A;&#x770B;&#x4E00;&#x4E0B;&#x3002;**
+- &#x5728;&#x51FD;&#x6570;&#x4E2D;this&#x5230;&#x5E95;&#x53D6;&#x4F55;&#x503C;&#xFF0C;&#x662F;&#x5728;&#x51FD;&#x6570;&#x771F;&#x6B63;&#x88AB;&#x8C03;&#x7528;&#x6267;&#x884C;&#x7684;&#x65F6;&#x5019;&#x786E;&#x5B9A;&#x7684;&#xFF0C;&#x51FD;&#x6570;&#x5B9A;&#x4E49;&#x7684;&#x65F6;&#x5019;&#x786E;&#x5B9A;&#x4E0D;&#x4E86;&#x3002;&#x56E0;&#x4E3A;this&#x7684;&#x53D6;&#x503C;&#x662F;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x7684;&#x4E00;&#x90E8;&#x5206;&#xFF0C;&#x6BCF;&#x6B21;&#x8C03;&#x7528;&#x51FD;&#x6570;&#xFF0C;&#x90FD;&#x4F1A;&#x4EA7;&#x751F;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x3002;
+
+&gt;&#x60C5;&#x51B5;1&#xFF1A;&#x6784;&#x9020;&#x51FD;&#x6570;
+- &#x6240;&#x8C13;&#x6784;&#x9020;&#x51FD;&#x6570;&#x5C31;&#x662F;&#x7528;&#x6765;new&#x5BF9;&#x8C61;&#x7684;&#x51FD;&#x6570;&#x3002;&#x5176;&#x5B9E;&#x4E25;&#x683C;&#x6765;&#x8BF4;&#xFF0C;&#x6240;&#x6709;&#x7684;&#x51FD;&#x6570;&#x90FD;&#x53EF;&#x4EE5;new&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x4F46;&#x662F;&#x6709;&#x4E9B;&#x51FD;&#x6570;&#x7684;&#x5B9A;&#x4E49;&#x662F;&#x4E3A;&#x4E86;new&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x800C;&#x6709;&#x4E9B;&#x51FD;&#x6570;&#x5219;&#x4E0D;&#x662F;&#x3002;&#x53E6;&#x5916;&#x6CE8;&#x610F;&#xFF0C;&#x6784;&#x9020;&#x51FD;&#x6570;&#x7684;&#x51FD;&#x6570;&#x540D;&#x7B2C;&#x4E00;&#x4E2A;&#x5B57;&#x6BCD;&#x5927;&#x5199;&#xFF08;&#x89C4;&#x5219;&#x7EA6;&#x5B9A;&#xFF09;&#x3002;&#x4F8B;&#x5982;&#xFF1A;Object&#x3001;Array&#x3001;Function&#x7B49;&#x3002;
+
+![prototype](../../../image/closure/prototype25.png)
+
+ &#x4EE5;&#x4E0A;&#x4EE3;&#x7801;&#x4E2D;&#xFF0C;&#x5982;&#x679C;&#x51FD;&#x6570;&#x4F5C;&#x4E3A;&#x6784;&#x9020;&#x51FD;&#x6570;&#x7528;&#xFF0C;&#x90A3;&#x4E48;&#x5176;&#x4E2D;&#x7684;this&#x5C31;&#x4EE3;&#x8868;&#x5B83;&#x5373;&#x5C06;new&#x51FA;&#x6765;&#x7684;&#x5BF9;&#x8C61;&#x3002;
+
+ &#x6CE8;&#x610F;&#xFF0C;&#x4EE5;&#x4E0A;&#x4EC5;&#x9650;new Foo()&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x5373;Foo&#x51FD;&#x6570;&#x4F5C;&#x4E3A;&#x6784;&#x9020;&#x51FD;&#x6570;&#x7684;&#x60C5;&#x51B5;&#x3002;&#x5982;&#x679C;&#x76F4;&#x63A5;&#x8C03;&#x7528;Foo&#x51FD;&#x6570;&#xFF0C;&#x800C;&#x4E0D;&#x662F;new Foo()&#xFF0C;&#x60C5;&#x51B5;&#x5C31;&#x5927;&#x4E0D;&#x4E00;&#x6837;&#x4E86;&#x3002;
+![prototype](../../../image/closure/prototype26.png)
+
+&gt;&#x60C5;&#x51B5;2&#xFF1A;&#x51FD;&#x6570;&#x4F5C;&#x4E3A;&#x5BF9;&#x8C61;&#x7684;&#x4E00;&#x4E2A;&#x5C5E;&#x6027;
+- &#x5982;&#x679C;&#x51FD;&#x6570;&#x4F5C;&#x4E3A;&#x5BF9;&#x8C61;&#x7684;&#x4E00;&#x4E2A;&#x5C5E;&#x6027;&#x65F6;&#xFF0C;&#x5E76;&#x4E14;&#x4F5C;&#x4E3A;&#x5BF9;&#x8C61;&#x7684;&#x4E00;&#x4E2A;&#x5C5E;&#x6027;&#x88AB;&#x8C03;&#x7528;&#x65F6;&#xFF0C;&#x51FD;&#x6570;&#x4E2D;&#x7684;this&#x6307;&#x5411;&#x8BE5;&#x5BF9;&#x8C61;
+![prototype](../../../image/closure/prototype27.png)
+
+ &#x4EE5;&#x4E0A;&#x4EE3;&#x7801;&#x4E2D;&#xFF0C;fn&#x4E0D;&#x4EC5;&#x4F5C;&#x4E3A;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x7684;&#x4E00;&#x4E2A;&#x5C5E;&#x6027;&#xFF0C;&#x800C;&#x4E14;&#x7684;&#x786E;&#x662F;&#x4F5C;&#x4E3A;&#x5BF9;&#x8C61;&#x7684;&#x4E00;&#x4E2A;&#x5C5E;&#x6027;&#x88AB;&#x8C03;&#x7528;&#x3002;&#x7ED3;&#x679C;this&#x5C31;&#x662F;obj&#x5BF9;&#x8C61;&#x3002;
+
+ &#x6CE8;&#x610F;&#xFF0C;&#x5982;&#x679C;fn&#x51FD;&#x6570;&#x4E0D;&#x4F5C;&#x4E3A;obj&#x7684;&#x4E00;&#x4E2A;&#x5C5E;&#x6027;&#x88AB;&#x8C03;&#x7528;&#xFF0C;&#x4F1A;&#x662F;&#x4EC0;&#x4E48;&#x7ED3;&#x679C;&#x5462;&#xFF1F;
+![prototype](../../../image/closure/prototype28.png) 
+&#x5982;&#x4E0A;&#x4EE3;&#x7801;&#xFF0C;&#x5982;&#x679C;fn&#x51FD;&#x6570;&#x88AB;&#x8D4B;&#x503C;&#x5230;&#x4E86;&#x53E6;&#x4E00;&#x4E2A;&#x53D8;&#x91CF;&#x4E2D;&#xFF0C;&#x5E76;&#x6CA1;&#x6709;&#x4F5C;&#x4E3A;obj&#x7684;&#x4E00;&#x4E2A;&#x5C5E;&#x6027;&#x88AB;&#x8C03;&#x7528;&#xFF0C;&#x90A3;&#x4E48;this&#x7684;&#x503C;&#x5C31;&#x662F;window&#xFF0C;this.x&#x4E3A;undefined
+
+&gt;&#x60C5;&#x51B5;3&#xFF1A;&#x51FD;&#x6570;&#x7528;call&#x6216;&#x8005;apply&#x8C03;&#x7528;
+- &#x5F53;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x88AB;call&#x548C;apply&#x8C03;&#x7528;&#x65F6;&#xFF0C;this&#x7684;&#x503C;&#x5C31;&#x53D6;&#x4F20;&#x5165;&#x7684;&#x5BF9;&#x8C61;&#x7684;&#x503C;&#x3002;&#x81F3;&#x4E8E;call&#x548C;apply&#x5982;&#x4F55;&#x4F7F;&#x7528;&#xFF0C;&#x4E0D;&#x4F1A;&#x7684;&#x670B;&#x53CB;&#x53EF;&#x4EE5;&#x53BB;&#x67E5;&#x67E5;&#x5176;&#x4ED6;&#x8D44;&#x6599;&#xFF0C;&#x672C;&#x7CFB;&#x5217;&#x6559;&#x7A0B;&#x4E0D;&#x505A;&#x8BB2;&#x89E3;&#x3002;
+![prototype](../../../image/closure/prototype29.png)
+
+&gt;&#x60C5;&#x51B5;4&#xFF1A;&#x5168;&#x5C40; &amp; &#x8C03;&#x7528;&#x666E;&#x901A;&#x51FD;&#x6570;
+
+ &#x5728;&#x5168;&#x5C40;&#x73AF;&#x5883;&#x4E0B;&#xFF0C;this&#x6C38;&#x8FDC;&#x662F;window&#xFF0C;&#x8FD9;&#x4E2A;&#x5E94;&#x8BE5;&#x6CA1;&#x6709;&#x975E;&#x8BAE;&#x3002;
+ console.log(this ===window); //true
+
+ &#x666E;&#x901A;&#x51FD;&#x6570;&#x5728;&#x8C03;&#x7528;&#x65F6;&#xFF0C;&#x5176;&#x4E2D;&#x7684;this&#x4E5F;&#x90FD;&#x662F;window&#x3002;
+</code></pre><p> var x = 10;
+ var fn = function(){
+     console.log(this); //window 
+     console.log(this.x);//10
+ }
+ fn();</p>
+<pre><code>&#x4E0D;&#x8FC7;&#x4E0B;&#x9762;&#x7684;&#x60C5;&#x51B5;&#x4F60;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x4E00;&#x4E0B;&#xFF1A;
+</code></pre><p>var obj = {
+    x:10,
+    fn:function(){
+         function f(){
+             console.log(this);//window
+             console.log(this.x);//undefined
+         }
+         f();
+    }
+}
+obj.fn();
+```
+&#x51FD;&#x6570;f&#x867D;&#x7136;&#x662F;&#x5728;obj.fn&#x5185;&#x90E8;&#x5B9A;&#x4E49;&#x7684;&#xFF0C;&#x4F46;&#x662F;&#x5B83;&#x4ECD;&#x7136;&#x662F;&#x4E00;&#x4E2A;&#x666E;&#x901A;&#x7684;&#x51FD;&#x6570;&#xFF0C;this&#x4ECD;&#x7136;&#x6307;&#x5411;window&#x3002;</p>
+<blockquote>
+<p>&#x6700;&#x540E;jQuery&#x6E90;&#x7801;
+<a href="../../../image/closure/prototype30.png" data-lightbox="4c91036e-d4b0-4e4a-88a3-de2f24bc615f" data-title="prototype"><img src="../../../image/closure/prototype30.png" alt="prototype"></a></p>
+</blockquote>
+<p> &#x4EE5;&#x4E0A;&#x4EE3;&#x7801;&#x662F;&#x4ECE;jQuery&#x4E2D;&#x6458;&#x9664;&#x6765;&#x7684;&#x90E8;&#x5206;&#x4EE3;&#x7801;&#x3002;jQuery.extend&#x548C;jQuery.fn.extend&#x90FD;&#x6307;&#x5411;&#x4E86;&#x540C;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x4F46;&#x662F;&#x5F53;&#x6267;&#x884C;&#x65F6;&#xFF0C;&#x51FD;&#x6570;&#x4E2D;&#x7684;this&#x662F;&#x4E0D;&#x4E00;&#x6837;&#x7684;&#x3002;</p>
+<p> &#x6267;&#x884C;jQuery.extend(&#x2026;)&#x65F6;&#xFF0C;this&#x6307;&#x5411;jQuery&#xFF1B;&#x6267;&#x884C;jQuery.fn.extend(&#x2026;)&#x65F6;&#xFF0C;this&#x6307;&#x5411;jQuery.fn&#x3002;</p>
+<blockquote>
+<p>this &#x8865;&#x5145;
+ &#x539F;&#x6587;&#x4E2D;this&#x7684;&#x5176;&#x4E2D;&#x4E00;&#x79CD;&#x60C5;&#x51B5;&#x662F;&#x6784;&#x9020;&#x51FD;&#x6570;&#x7684;&#xFF0C;&#x8981;&#x8865;&#x5145;&#x7684;&#x5185;&#x5BB9;&#x662F;&#xFF0C;&#x5728;&#x6784;&#x9020;&#x51FD;&#x6570;&#x7684;prototype&#x4E2D;&#xFF0C;this&#x4EE3;&#x8868;&#x7740;&#x4EC0;&#x4E48;&#x3002;
+<a href="../../../image/closure/prototype31.png" data-lightbox="da906f68-105a-4d97-85d9-a6ba8c8c0d6f" data-title="prototype"><img src="../../../image/closure/prototype31.png" alt="prototype"></a> 
+ &#x5982;&#x4E0A;&#x4EE3;&#x7801;&#xFF0C;&#x5728;Fn.prototype.getName&#x51FD;&#x6570;&#x4E2D;&#xFF0C;this&#x6307;&#x5411;&#x7684;&#x662F;f1&#x5BF9;&#x8C61;&#x3002;&#x56E0;&#x6B64;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;this.name&#x83B7;&#x53D6;f1.name&#x7684;&#x503C;&#x3002;</p>
+</blockquote>
+<p> &#x5176;&#x5B9E;&#xFF0C;&#x4E0D;&#x4EC5;&#x4EC5;&#x662F;&#x6784;&#x9020;&#x51FD;&#x6570;&#x7684;prototype&#xFF0C;&#x5373;&#x4FBF;&#x662F;&#x5728;&#x6574;&#x4E2A;&#x539F;&#x578B;&#x94FE;&#x4E2D;&#xFF0C;this&#x4EE3;&#x8868;&#x7684;&#x4E5F;&#x90FD;&#x662F;&#x5F53;&#x524D;&#x5BF9;&#x8C61;&#x7684;&#x503C;&#x3002;</p>
+<h3 id="&#x6DF1;&#x5165;&#x7406;&#x89E3;javascript&#x539F;&#x578B;&#x548C;&#x95ED;&#x5305;&#xFF08;11&#xFF09;&#x2014;&#x2014;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x6808;">&#x6DF1;&#x5165;&#x7406;&#x89E3;javascript&#x539F;&#x578B;&#x548C;&#x95ED;&#x5305;&#xFF08;11&#xFF09;&#x2014;&#x2014;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x6808;</h3>
+<blockquote>
+<p>&#x6267;&#x884C;&#x5168;&#x5C40;&#x4EE3;&#x7801;&#x65F6;&#xFF0C;&#x4F1A;&#x4EA7;&#x751F;&#x4E00;&#x4E2A;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#xFF0C;&#x6BCF;&#x6B21;&#x8C03;&#x7528;&#x51FD;&#x6570;&#x90FD;&#x53C8;&#x4F1A;&#x4EA7;&#x751F;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x3002;&#x5F53;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x5B8C;&#x6210;&#x65F6;&#xFF0C;&#x8FD9;&#x4E2A;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x4EE5;&#x53CA;&#x5176;&#x4E2D;&#x7684;&#x6570;&#x636E;&#x90FD;&#x4F1A;&#x88AB;&#x6D88;&#x9664;&#xFF0C;&#x518D;&#x91CD;&#x65B0;&#x56DE;&#x5230;&#x5168;&#x5C40;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x3002;&#x5904;&#x4E8E;&#x6D3B;&#x52A8;&#x72B6;&#x6001;&#x7684;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x3002;</p>
+</blockquote>
+<p> &#x5176;&#x5B9E;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x538B;&#x6808;&#x51FA;&#x6808;&#x7684;&#x8FC7;&#x7A0B;&#x2014;&#x2014;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x6808;&#x3002;&#x5982;&#x4E0B;&#x56FE;&#xFF1A;
+<a href="../../../image/closure/prototype32.png" data-lightbox="0e0d1ae6-5734-4ff7-887c-ba12852e8ee4" data-title="prototype"><img src="../../../image/closure/prototype32.png" alt="prototype"></a>  </p>
+<blockquote>
+<p>&#x53EF;&#x6839;&#x636E;&#x4EE5;&#x4E0B;&#x4EE3;&#x7801;&#x6765;&#x8BE6;&#x7EC6;&#x4ECB;&#x7ECD;&#x4E0A;&#x4E0B;&#x6587;&#x6808;&#x7684;&#x538B;&#x6808;&#x3001;&#x51FA;&#x6808;&#x8FC7;&#x7A0B;&#x3002;
+<a href="../../../image/closure/prototype33.png" data-lightbox="2f6f7c2d-b185-4470-8559-ec24979ccec5" data-title="prototype"><img src="../../../image/closure/prototype33.png" alt="prototype"></a></p>
+</blockquote>
+<p>&#x5982;&#x4E0A;&#x4EE3;&#x7801;&#x3002;
+<a href="../../../image/closure/prototype35.png" data-lightbox="6b1460c6-ff86-409c-9eb3-f93ab79f91ef" data-title="prototype"><img src="../../../image/closure/prototype35.png" alt="prototype"></a>
+<a href="../../../image/closure/prototype34.png" data-lightbox="cdc6629d-6913-467e-b06e-3033134c3fba" data-title="prototype"><img src="../../../image/closure/prototype34.png" alt="prototype"></a></p>
+<blockquote>
+<p>&#x8BB2;&#x5230;&#x8FD9;&#x91CC;&#xFF0C;&#x6211;&#x4E0D;&#x5F97;&#x4E0D;&#x5F88;&#x9057;&#x61BE;&#x7684;&#x8DDF;&#x5927;&#x5BB6;&#x8BF4;&#xFF1A;&#x5176;&#x5B9E;&#x4EE5;&#x4E0A;&#x6211;&#x4EEC;&#x6240;&#x6F14;&#x793A;&#x7684;&#x662F;&#x4E00;&#x79CD;&#x6BD4;&#x8F83;&#x7406;&#x60F3;&#x7684;&#x60C5;&#x51B5;&#x3002;&#x6709;&#x4E00;&#x79CD;&#x60C5;&#x51B5;&#xFF0C;&#x800C;&#x4E14;&#x662F;&#x5F88;&#x5E38;&#x7528;&#x7684;&#x4E00;&#x79CD;&#x60C5;&#x51B5;&#xFF0C;&#x65E0;&#x6CD5;&#x505A;&#x5230;&#x8FD9;&#x6837;&#x5E72;&#x51C0;&#x5229;&#x843D;&#x7684;&#x8BF4;&#x9500;&#x6BC1;&#x5C31;&#x9500;&#x6BC1;&#x3002;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x5C31;&#x662F;&#x4F1F;&#x5927;&#x7684;&#x2014;&#x2014;&#x95ED;&#x5305;&#x3002;</p>
+</blockquote>
+<p>&#x8981;&#x8BF4;&#x95ED;&#x5305;&#xFF0C;&#x54B1;&#x4EEC;&#x8FD8;&#x5F97;&#x5148;&#x4ECE;&#x81EA;&#x7531;&#x53D8;&#x91CF;&#x548C;&#x4F5C;&#x7528;&#x57DF;&#x8BF4;&#x8D77;&#x3002;</p>
+<h3 id="&#x6DF1;&#x5165;&#x7406;&#x89E3;javascript&#x539F;&#x578B;&#x548C;&#x95ED;&#x5305;&#xFF08;12&#xFF09;&#x2014;&#x2014;&#x7B80;&#x4ECB;&#x3010;&#x4F5C;&#x7528;&#x57DF;&#x3011;">&#x6DF1;&#x5165;&#x7406;&#x89E3;javascript&#x539F;&#x578B;&#x548C;&#x95ED;&#x5305;&#xFF08;12&#xFF09;&#x2014;&#x2014;&#x7B80;&#x4ECB;&#x3010;&#x4F5C;&#x7528;&#x57DF;&#x3011;</h3>
+<blockquote>
+<p>&#x63D0;&#x5230;&#x4F5C;&#x7528;&#x57DF;&#xFF0C;&#x6709;&#x4E00;&#x53E5;&#x8BDD;&#x5927;&#x5BB6;&#xFF08;&#x6709;js&#x5F00;&#x53D1;&#x7ECF;&#x9A8C;&#x8005;&#xFF09;&#x53EF;&#x80FD;&#x6BD4;&#x8F83;&#x719F;&#x6089;&#xFF1A;&#x201C;javascript&#x6CA1;&#x6709;&#x5757;&#x7EA7;&#x4F5C;&#x7528;&#x57DF;&#x201D;&#x3002;&#x6240;&#x8C13;&#x201C;&#x5757;&#x201D;&#xFF0C;&#x5C31;&#x662F;&#x5927;&#x62EC;&#x53F7;&#x201C;&#xFF5B;&#xFF5D;&#x201D;&#x4E2D;&#x95F4;&#x7684;&#x8BED;&#x53E5;&#x3002;&#x4F8B;&#x5982;if&#x8BED;&#x53E5;&#xFF1A;</p>
+</blockquote>
+<p><a href="../../../image/closure/prototype36.png" data-lightbox="d8b00803-e35a-445f-8539-f5776164d470" data-title="prototype"><img src="../../../image/closure/prototype36.png" alt="prototype"></a></p>
+<blockquote>
+<p>&#x5176;&#x5B9E;&#xFF0C;&#x4F60;&#x5149;&#x77E5;&#x9053;&#x201C;javascript&#x6CA1;&#x6709;&#x5757;&#x7EA7;&#x4F5C;&#x7528;&#x57DF;&#x201D;&#x662F;&#x5B8C;&#x5168;&#x4E0D;&#x591F;&#x7684;&#xFF0C;&#x4F60;&#x9700;&#x8981;&#x77E5;&#x9053;&#x7684;&#x662F;&#x2014;&#x2014;javascript&#x9664;&#x4E86;&#x5168;&#x5C40;&#x4F5C;&#x7528;&#x57DF;&#x4E4B;&#x5916;&#xFF0C;&#x53EA;&#x6709;&#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x521B;&#x5EFA;&#x7684;&#x4F5C;&#x7528;&#x57DF;&#x3002;</p>
+</blockquote>
+<p><strong>&#x6240;&#x4EE5;&#xFF0C;&#x6211;&#x4EEC;&#x5728;&#x58F0;&#x660E;&#x53D8;&#x91CF;&#x65F6;&#xFF0C;&#x5168;&#x5C40;&#x4EE3;&#x7801;&#x8981;&#x5728;&#x4EE3;&#x7801;&#x524D;&#x7AEF;&#x58F0;&#x660E;&#xFF0C;&#x51FD;&#x6570;&#x4E2D;&#x8981;&#x5728;&#x51FD;&#x6570;&#x4F53;&#x4E00;&#x5F00;&#x59CB;&#x5C31;&#x58F0;&#x660E;&#x597D;&#x3002;&#x9664;&#x4E86;&#x8FD9;&#x4E24;&#x4E2A;&#x5730;&#x65B9;&#xFF0C;&#x5176;&#x4ED6;&#x5730;&#x65B9;&#x90FD;&#x4E0D;&#x8981;&#x51FA;&#x73B0;&#x53D8;&#x91CF;&#x58F0;&#x660E;&#x3002;&#x800C;&#x4E14;&#x5EFA;&#x8BAE;&#x7528;&#x201C;&#x5355;var&#x201D;&#x5F62;&#x5F0F;&#x3002;</strong></p>
+<ul>
+<li>jQuery&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x5F88;&#x597D;&#x7684;&#x793A;&#x4F8B;
+<a href="../../../image/closure/prototype37.png" data-lightbox="79bd46e7-9092-475a-8448-a3f512dde903" data-title="prototype"><img src="../../../image/closure/prototype37.png" alt="prototype"></a><blockquote>
+<p>&#x4E0B;&#x9762;&#x7EE7;&#x7EED;&#x8BF4;&#x4F5C;&#x7528;&#x57DF;&#x3002;&#x4F5C;&#x7528;&#x57DF;&#x662F;&#x4E00;&#x4E2A;&#x5F88;&#x62BD;&#x8C61;&#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x7C7B;&#x4F3C;&#x4E8E;&#x4E00;&#x4E2A;&#x201C;&#x5730;&#x76D8;&#x201D;
+<a href="../../../image/closure/prototype38.png" data-lightbox="d393f864-48c2-4761-aabb-c5f43fa209b0" data-title="prototype"><img src="../../../image/closure/prototype38.png" alt="prototype"></a></p>
+</blockquote>
+</li>
+<li>&#x5982;&#x4E0A;&#x56FE;&#xFF0C;&#x5168;&#x5C40;&#x4EE3;&#x7801;&#x548C;fn&#x3001;bar&#x4E24;&#x4E2A;&#x51FD;&#x6570;&#x90FD;&#x4F1A;&#x5F62;&#x6210;&#x4E00;&#x4E2A;&#x4F5C;&#x7528;&#x57DF;&#x3002;&#x800C;&#x4E14;&#xFF0C;&#x4F5C;&#x7528;&#x57DF;&#x6709;&#x4E0A;&#x4E0B;&#x7EA7;&#x7684;&#x5173;&#x7CFB;&#xFF0C;&#x4E0A;&#x4E0B;&#x7EA7;&#x5173;&#x7CFB;&#x7684;&#x786E;&#x5B9A;&#x5C31;&#x770B;&#x51FD;&#x6570;&#x662F;&#x5728;&#x54EA;&#x4E2A;&#x4F5C;&#x7528;&#x57DF;&#x4E0B;&#x521B;&#x5EFA;&#x7684;&#x3002;&#x4F8B;&#x5982;&#xFF0C;fn&#x4F5C;&#x7528;&#x57DF;&#x4E0B;&#x521B;&#x5EFA;&#x4E86;bar&#x51FD;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#x201C;fn&#x4F5C;&#x7528;&#x57DF;&#x201D;&#x5C31;&#x662F;&#x201C;bar&#x4F5C;&#x7528;&#x57DF;&#x201D;&#x7684;&#x4E0A;&#x7EA7;&#x3002;</li>
+<li>&#x4F5C;&#x7528;&#x57DF;&#x6700;&#x5927;&#x7684;&#x7528;&#x5904;&#x5C31;&#x662F;&#x9694;&#x79BB;&#x53D8;&#x91CF;&#xFF0C;&#x4E0D;&#x540C;&#x4F5C;&#x7528;&#x57DF;&#x4E0B;&#x540C;&#x540D;&#x53D8;&#x91CF;&#x4E0D;&#x4F1A;&#x6709;&#x51B2;&#x7A81;&#x3002;&#x4F8B;&#x5982;&#x4EE5;&#x4E0A;&#x4EE3;&#x7801;&#x4E2D;&#xFF0C;&#x4E09;&#x4E2A;&#x4F5C;&#x7528;&#x57DF;&#x4E0B;&#x90FD;&#x58F0;&#x660E;&#x4E86;&#x201C;a&#x201D;&#x8FD9;&#x4E2A;&#x53D8;&#x91CF;&#xFF0C;&#x4F46;&#x662F;&#x4ED6;&#x4EEC;&#x4E0D;&#x4F1A;&#x6709;&#x51B2;&#x7A81;&#x3002;&#x5404;&#x81EA;&#x7684;&#x4F5C;&#x7528;&#x57DF;&#x4E0B;&#xFF0C;&#x7528;&#x5404;&#x81EA;&#x7684;&#x201C;a&#x201D;&#x3002;</li>
+</ul>
+<p>&#x8BF4;&#x5230;&#x8FD9;&#x91CC;&#xFF0C;&#x54B1;&#x4EEC;&#x53C8;&#x53EF;&#x4EE5;&#x62FF;&#x51FA;jquery&#x6E90;&#x7801;&#x6765;&#x8BB2;&#x8BB2;&#x4E86;&#x3002;</p>
+<blockquote>
+<p>jQuery&#x6E90;&#x7801;&#x7684;&#x6700;&#x5916;&#x5C42;&#x662F;&#x4E00;&#x4E2A;&#x81EA;&#x52A8;&#x6267;&#x884C;&#x7684;&#x533F;&#x540D;&#x51FD;&#x6570;&#xFF1A;
+<a href="../../../image/closure/prototype39.png" data-lightbox="b1ffb8d6-98bf-403c-8467-0167712cb273" data-title="prototype"><img src="../../../image/closure/prototype39.png" alt="prototype"></a></p>
+<ul>
+<li>&#x539F;&#x56E0;&#x5C31;&#x662F;&#x5728;jQuery&#x6E90;&#x7801;&#x4E2D;&#xFF0C;&#x58F0;&#x660E;&#x4E86;&#x5927;&#x91CF;&#x7684;&#x53D8;&#x91CF;&#xFF0C;&#x8FD9;&#x4E9B;&#x53D8;&#x91CF;&#x5C06;&#x901A;&#x8FC7;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x88AB;&#x9650;&#x5236;&#x5728;&#x4E00;&#x4E2A;&#x72EC;&#x7ACB;&#x7684;&#x4F5C;&#x7528;&#x57DF;&#x4E2D;&#xFF0C;&#x800C;&#x4E0D;&#x4F1A;&#x4E0E;&#x5168;&#x5C40;&#x4F5C;&#x7528;&#x57DF;&#x6216;&#x8005;&#x5176;&#x4ED6;&#x51FD;&#x6570;&#x4F5C;&#x7528;&#x57DF;&#x7684;&#x540C;&#x540D;&#x53D8;&#x91CF;&#x4EA7;&#x751F;&#x51B2;&#x7A81;&#x3002;&#x5168;&#x4E16;&#x754C;&#x7684;&#x5F00;&#x53D1;&#x8005;&#x90FD;&#x5728;&#x7528;jQuery&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x8FD9;&#x6837;&#x505A;&#xFF0C;&#x5F88;&#x53EF;&#x80FD;&#x5BFC;&#x81F4;jQuery&#x6E90;&#x7801;&#x4E2D;&#x7684;&#x53D8;&#x91CF;&#x4E0E;&#x5916;&#x90E8;javascript&#x4EE3;&#x7801;&#x4E2D;&#x7684;&#x53D8;&#x91CF;&#x91CD;&#x540D;&#xFF0C;&#x4ECE;&#x800C;&#x4EA7;&#x751F;&#x51B2;&#x7A81;&#x3002;</li>
+</ul>
+</blockquote>
+<p> &#x4F5C;&#x7528;&#x57DF;&#x8FD9;&#x5757;&#x53EA;&#x662F;&#x5F88;&#x4E0D;&#x597D;&#x89E3;&#x91CA;&#xFF0C;&#x54B1;&#x4EEC;&#x5C31;&#x5C0F;&#x6B65;&#x5FEB;&#x8DD1;&#xFF0C;&#x4E00;&#x6B65;&#x4E00;&#x6B65;&#x6162;&#x6162;&#x5C55;&#x793A;&#x7ED9;&#x5927;&#x5BB6;&#x3002;</p>
+<p>  &#x4E0B;&#x4E00;&#x8282;&#x5C06;&#x628A;&#x4F5C;&#x7528;&#x57DF;&#x548C;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x7ED3;&#x5408;&#x8D77;&#x6765;&#x8BF4;&#x4E00;&#x8BF4;&#x3002;</p>
+<p> &#x53EF;&#x89C1;&#xFF0C;&#x8981;&#x7406;&#x89E3;&#x95ED;&#x5305;&#xFF0C;&#x4E0D;&#x662F;&#x4E00;&#x4E24;&#x53E5;&#x8BDD;&#x80FD;&#x8BF4;&#x6E05;&#x695A;&#x7684;&#x3002;&#x3002;&#x3002;</p>
+<h3 id="&#x6DF1;&#x5165;&#x7406;&#x89E3;javascript&#x539F;&#x578B;&#x548C;&#x95ED;&#x5305;&#xFF08;13&#xFF09;-&#x3010;&#x4F5C;&#x7528;&#x57DF;&#x3011;&#x548C;&#x3010;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x3011;">&#x6DF1;&#x5165;&#x7406;&#x89E3;javascript&#x539F;&#x578B;&#x548C;&#x95ED;&#x5305;&#xFF08;13&#xFF09;-&#x3010;&#x4F5C;&#x7528;&#x57DF;&#x3011;&#x548C;&#x3010;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x3011;</h3>
+<blockquote>
+<p>&#x672C;&#x6587;&#x628A;&#x4F5C;&#x7528;&#x57DF;&#x548C;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x7ED3;&#x5408;&#x8D77;&#x6765;&#x8BF4;&#x4E00;&#x4E0B;&#xFF0C;&#x4F1A;&#x7406;&#x89E3;&#x7684;&#x66F4;&#x6DF1;&#x4E00;&#x4E9B;
+<a href="../../../image/closure/prototype40.png" data-lightbox="26702d10-f9d0-4f39-bc14-6e05d3566ec4" data-title="prototype"><img src="../../../image/closure/prototype40.png" alt="prototype"></a></p>
+</blockquote>
+<p><strong>&#x5982;&#x4E0A;&#x56FE;&#xFF0C;&#x6211;&#x4EEC;&#x5728;&#x4E0A;&#x6587;&#x4E2D;&#x5DF2;&#x7ECF;&#x4ECB;&#x7ECD;&#x4E86;&#xFF0C;&#x9664;&#x4E86;&#x5168;&#x5C40;&#x4F5C;&#x7528;&#x57DF;&#x4E4B;&#x5916;&#xFF0C;&#x6BCF;&#x4E2A;&#x51FD;&#x6570;&#x90FD;&#x4F1A;&#x521B;&#x5EFA;&#x81EA;&#x5DF1;&#x7684;&#x4F5C;&#x7528;&#x57DF;&#xFF0C;&#x4F5C;&#x7528;&#x57DF;&#x5728;&#x51FD;&#x6570;&#x5B9A;&#x4E49;&#x65F6;&#x5C31;&#x5DF2;&#x7ECF;&#x786E;&#x5B9A;&#x4E86;&#x3002;&#x800C;&#x4E0D;&#x662F;&#x5728;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x65F6;&#x786E;&#x5B9A;&#x3002;</strong></p>
+<blockquote>
+<p>&#x7B2C;&#x4E00;&#x6B65;&#xFF0C;&#x5728;&#x52A0;&#x8F7D;&#x7A0B;&#x5E8F;&#x65F6;&#xFF0C;&#x5DF2;&#x7ECF;&#x786E;&#x5B9A;&#x4E86;&#x5168;&#x5C40;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#xFF0C;&#x5E76;&#x968F;&#x7740;&#x7A0B;&#x5E8F;&#x7684;&#x6267;&#x884C;&#x800C;&#x5BF9;&#x53D8;&#x91CF;&#x5C31;&#x884C;&#x8D4B;&#x503C;&#x3002;
+<a href="../../../image/closure/prototype41.png" data-lightbox="7e11491d-94e3-4125-83de-092465700125" data-title="prototype"><img src="../../../image/closure/prototype41.png" alt="prototype"></a>
+&#x7B2C;&#x4E8C;&#x6B65;&#xFF0C;&#x7A0B;&#x5E8F;&#x6267;&#x884C;&#x5230;&#x7B2C;27&#x884C;&#xFF0C;&#x8C03;&#x7528;fn(10)&#xFF0C;&#x6B64;&#x65F6;&#x751F;&#x6210;&#x6B64;&#x6B21;&#x8C03;&#x7528;fn&#x51FD;&#x6570;&#x65F6;&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#xFF0C;&#x538B;&#x6808;&#xFF0C;&#x5E76;&#x5C06;&#x6B64;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x8BBE;&#x7F6E;&#x4E3A;&#x6D3B;&#x52A8;&#x72B6;&#x6001;&#x3002;
+<a href="../../../image/closure/prototype42.png" data-lightbox="980d3d0d-e1a9-4418-8b19-bd0b83fb6f01" data-title="prototype"><img src="../../../image/closure/prototype42.png" alt="prototype"></a>
+&#x7B2C;&#x4E09;&#x6B65;&#xFF0C;&#x6267;&#x884C;&#x5230;&#x7B2C;23&#x884C;&#x65F6;&#xFF0C;&#x8C03;&#x7528;bar(100)&#xFF0C;&#x751F;&#x6210;&#x6B64;&#x6B21;&#x8C03;&#x7528;&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#xFF0C;&#x538B;&#x6808;&#xFF0C;&#x5E76;&#x8BBE;&#x7F6E;&#x4E3A;&#x6D3B;&#x52A8;&#x72B6;&#x6001;&#x3002;
+<a href="../../../image/closure/prototype43.png" data-lightbox="19fe39da-22d3-4127-888f-1b501cf707f7" data-title="prototype"><img src="../../../image/closure/prototype43.png" alt="prototype"></a>
+&#x7B2C;&#x56DB;&#x6B65;&#xFF0C;&#x6267;&#x884C;&#x5B8C;&#x7B2C;23&#x884C;&#xFF0C;bar(100)&#x8C03;&#x7528;&#x5B8C;&#x6210;&#x3002;&#x5219;bar(100)&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x88AB;&#x9500;&#x6BC1;&#x3002;&#x63A5;&#x7740;&#x6267;&#x884C;&#x7B2C;24&#x884C;&#xFF0C;&#x8C03;&#x7528;bar(200)&#xFF0C;&#x5219;&#x53C8;&#x751F;&#x6210;bar(200)&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#xFF0C;&#x538B;&#x6808;&#xFF0C;&#x8BBE;&#x7F6E;&#x4E3A;&#x6D3B;&#x52A8;&#x72B6;&#x6001;
+<a href="../../../image/closure/prototype44.png" data-lightbox="9aa6811a-e1b0-4e73-a71c-d203c6943c4c" data-title="prototype"><img src="../../../image/closure/prototype44.png" alt="prototype"></a>
+&#x7B2C;&#x4E94;&#x6B65;&#xFF0C;&#x6267;&#x884C;&#x5B8C;&#x7B2C;24&#x884C;&#xFF0C;&#x5219;bar(200)&#x8C03;&#x7528;&#x7ED3;&#x675F;&#xFF0C;&#x5176;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x88AB;&#x9500;&#x6BC1;&#x3002;&#x6B64;&#x65F6;&#x4F1A;&#x56DE;&#x5230;fn(10)&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#xFF0C;&#x53D8;&#x4E3A;&#x6D3B;&#x52A8;&#x72B6;&#x6001;&#x3002;
+<a href="../../../image/closure/prototype45.png" data-lightbox="25c2994b-cd93-4abd-b041-7aacd1d3a0ec" data-title="prototype"><img src="../../../image/closure/prototype45.png" alt="prototype"></a>
+&#x7B2C;&#x516D;&#x6B65;&#xFF0C;&#x6267;&#x884C;&#x5B8C;&#x7B2C;27&#x884C;&#x4EE3;&#x7801;&#xFF0C;fn(10)&#x6267;&#x884C;&#x5B8C;&#x6210;&#x4E4B;&#x540E;&#xFF0C;fn(10)&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x88AB;&#x9500;&#x6BC1;&#xFF0C;&#x5168;&#x5C40;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x53C8;&#x56DE;&#x5230;&#x6D3B;&#x52A8;&#x72B6;&#x6001;&#x3002;
+<a href="../../../image/closure/prototype46.png" data-lightbox="10db33ee-0cff-4b1c-b4fa-902982e9bf50" data-title="prototype"><img src="../../../image/closure/prototype46.png" alt="prototype"></a>
+&#x6700;&#x540E;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x628A;&#x4EE5;&#x4E0A;&#x8FD9;&#x51E0;&#x4E2A;&#x56FE;&#x7247;&#x8FDE;&#x63A5;&#x8D77;&#x6765;&#x770B;&#x770B;&#x3002;
+<a href="../../../image/closure/prototype47.png" data-lightbox="0090ddc6-5979-4f63-ba79-90fc8957c627" data-title="prototype"><img src="../../../image/closure/prototype47.png" alt="prototype"></a>
+&#x8FDE;&#x63A5;&#x8D77;&#x6765;&#x770B;&#xFF0C;&#x8FD8;&#x662F;&#x633A;&#x6709;&#x610F;&#x601D;&#x7684;&#x3002;</p>
+<ul>
+<li><strong>&#x4F5C;&#x7528;&#x57DF;&#x53EA;&#x662F;&#x4E00;&#x4E2A;&#x201C;&#x5730;&#x76D8;&#x201D;&#xFF0C;&#x4E00;&#x4E2A;&#x62BD;&#x8C61;&#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x5176;&#x4E2D;&#x6CA1;&#x6709;&#x53D8;&#x91CF;&#x3002;&#x8981;&#x901A;&#x8FC7;&#x4F5C;&#x7528;&#x57DF;&#x5BF9;&#x5E94;&#x7684;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x6765;&#x83B7;&#x53D6;&#x53D8;&#x91CF;&#x7684;&#x503C;&#x3002;</strong></li>
+<li><strong>&#x540C;&#x4E00;&#x4E2A;&#x4F5C;&#x7528;&#x57DF;&#x4E0B;&#xFF0C;&#x4E0D;&#x540C;&#x7684;&#x8C03;&#x7528;&#x4F1A;&#x4EA7;&#x751F;&#x4E0D;&#x540C;&#x7684;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#xFF0C;&#x7EE7;&#x800C;&#x4EA7;&#x751F;&#x4E0D;&#x540C;&#x7684;&#x53D8;&#x91CF;&#x7684;&#x503C;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x4F5C;&#x7528;&#x57DF;&#x4E2D;&#x53D8;&#x91CF;&#x7684;&#x503C;&#x662F;&#x5728;&#x6267;&#x884C;&#x8FC7;&#x7A0B;&#x4E2D;&#x4EA7;&#x751F;&#x7684;&#x786E;&#x5B9A;&#x7684;&#xFF0C;&#x800C;&#x4F5C;&#x7528;&#x57DF;&#x5374;&#x662F;&#x5728;&#x51FD;&#x6570;&#x521B;&#x5EFA;&#x65F6;&#x5C31;&#x786E;&#x5B9A;&#x4E86;&#x3002;</strong></li>
+<li><strong>&#x6240;&#x4EE5;&#xFF0C;&#x5982;&#x679C;&#x8981;&#x67E5;&#x627E;&#x4E00;&#x4E2A;&#x4F5C;&#x7528;&#x57DF;&#x4E0B;&#x67D0;&#x4E2A;&#x53D8;&#x91CF;&#x7684;&#x503C;&#xFF0C;&#x5C31;&#x9700;&#x8981;&#x627E;&#x5230;&#x8FD9;&#x4E2A;&#x4F5C;&#x7528;&#x57DF;&#x5BF9;&#x5E94;&#x7684;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#xFF0C;&#x518D;&#x5728;&#x5176;&#x4E2D;&#x5BFB;&#x627E;&#x53D8;&#x91CF;&#x7684;&#x503C;&#x3002;</strong></li>
+</ul>
+</blockquote>
+<h3 id="&#x6DF1;&#x5165;&#x7406;&#x89E3;javascript&#x539F;&#x578B;&#x548C;&#x95ED;&#x5305;&#xFF08;14&#xFF09;&#x2014;&#x2014;&#x4ECE;&#x3010;&#x81EA;&#x7531;&#x53D8;&#x91CF;&#x3011;&#x5230;&#x3010;&#x4F5C;&#x7528;&#x57DF;&#x94FE;&#x3011;">&#x6DF1;&#x5165;&#x7406;&#x89E3;javascript&#x539F;&#x578B;&#x548C;&#x95ED;&#x5305;&#xFF08;14&#xFF09;&#x2014;&#x2014;&#x4ECE;&#x3010;&#x81EA;&#x7531;&#x53D8;&#x91CF;&#x3011;&#x5230;&#x3010;&#x4F5C;&#x7528;&#x57DF;&#x94FE;&#x3011;</h3>
+<blockquote>
+<p>&#x89E3;&#x91CA;&#x4E00;&#x4E0B;&#x4EC0;&#x4E48;&#x662F;&#x201C;&#x81EA;&#x7531;&#x53D8;&#x91CF;&#x201D;&#x3002;</p>
+</blockquote>
+<ul>
+<li>&#x5728;A&#x4F5C;&#x7528;&#x57DF;&#x4E2D;&#x4F7F;&#x7528;&#x7684;&#x53D8;&#x91CF;x&#xFF0C;&#x5374;&#x6CA1;&#x6709;&#x5728;A&#x4F5C;&#x7528;&#x57DF;&#x4E2D;&#x58F0;&#x660E;&#xFF08;&#x5373;&#x5728;&#x5176;&#x4ED6;&#x4F5C;&#x7528;&#x57DF;&#x4E2D;&#x58F0;&#x660E;&#x7684;&#xFF09;&#xFF0C;&#x5BF9;&#x4E8E;A&#x4F5C;&#x7528;&#x57DF;&#x6765;&#x8BF4;&#xFF0C;x&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x81EA;&#x7531;&#x53D8;&#x91CF;&#x3002;&#x5982;&#x4E0B;&#x56FE;
+<a href="../../../image/closure/prototype48.png" data-lightbox="29f6ca93-352c-4485-a148-f30e47f814ce" data-title="prototype"><img src="../../../image/closure/prototype48.png" alt="prototype"></a></li>
+<li>&#x5982;&#x4E0A;&#x7A0B;&#x5E8F;&#x4E2D;&#xFF0C;&#x5728;&#x8C03;&#x7528;fn()&#x51FD;&#x6570;&#x65F6;&#xFF0C;&#x51FD;&#x6570;&#x4F53;&#x4E2D;&#x7B2C;6&#x884C;&#x3002;&#x53D6;b&#x7684;&#x503C;&#x5C31;&#x76F4;&#x63A5;&#x53EF;&#x4EE5;&#x5728;fn&#x4F5C;&#x7528;&#x57DF;&#x4E2D;&#x53D6;&#xFF0C;&#x56E0;&#x4E3A;b&#x5C31;&#x662F;&#x5728;&#x8FD9;&#x91CC;&#x5B9A;&#x4E49;&#x7684;&#x3002;&#x800C;&#x53D6;x&#x7684;&#x503C;&#x65F6;&#xFF0C;&#x5C31;&#x9700;&#x8981;&#x5230;&#x53E6;&#x4E00;&#x4E2A;&#x4F5C;&#x7528;&#x57DF;&#x4E2D;&#x53D6;&#x3002;&#x5230;&#x54EA;&#x4E2A;&#x4F5C;&#x7528;&#x57DF;&#x4E2D;&#x53D6;&#x5462;&#xFF1F;</li>
+</ul>
+<blockquote>
+<p>&#x6709;&#x4EBA;&#x8BF4;&#x8FC7;&#x8981;&#x5230;&#x7236;&#x4F5C;&#x7528;&#x57DF;&#x4E2D;&#x53D6;&#xFF0C;&#x5176;&#x5B9E;&#x6709;&#x65F6;&#x5019;&#x8FD9;&#x79CD;&#x89E3;&#x91CA;&#x4F1A;&#x4EA7;&#x751F;&#x6B67;&#x4E49;&#x3002;&#x4F8B;&#x5982;&#xFF1A;
+<a href="../../../image/closure/prototype49.png" data-lightbox="1f41a3e2-c917-45c4-a248-40935d5f90c7" data-title="prototype"><img src="../../../image/closure/prototype49.png" alt="prototype"></a></p>
+<ul>
+<li>&#x6240;&#x4EE5;&#xFF0C;&#x4E0D;&#x8981;&#x5728;&#x7528;&#x4EE5;&#x4E0A;&#x8BF4;&#x6CD5;&#x4E86;&#x3002;&#x76F8;&#x6BD4;&#x800C;&#x8A00;&#xFF0C;&#x7528;&#x8FD9;&#x53E5;&#x8BDD;&#x63CF;&#x8FF0;&#x4F1A;&#x66F4;&#x52A0;&#x8D34;&#x5207;&#x2014;&#x2014;<strong>&#x8981;&#x5230;&#x521B;&#x5EFA;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x7684;&#x90A3;&#x4E2A;&#x4F5C;&#x7528;&#x57DF;&#x4E2D;&#x53D6;&#x503C;&#x2014;&#x2014;&#x662F;&#x201C;&#x521B;&#x5EFA;&#x201D;</strong>&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x201C;&#x8C03;&#x7528;&#x201D;&#xFF0C;&#x5207;&#x8BB0;&#x5207;&#x8BB0;&#x2014;&#x2014;&#x5176;&#x5B9E;&#x8FD9;&#x5C31;&#x662F;&#x6240;&#x8C13;&#x7684;&#x201C;&#x9759;&#x6001;&#x4F5C;&#x7528;&#x57DF;&#x201D;&#x3002;</li>
+</ul>
+</blockquote>
+<p>&#x5BF9;&#x4E8E;&#x672C;&#x6587;&#x7B2C;&#x4E00;&#x6BB5;&#x4EE3;&#x7801;&#xFF0C;&#x5728;fn&#x51FD;&#x6570;&#x4E2D;&#xFF0C;&#x53D6;&#x81EA;&#x7531;&#x53D8;&#x91CF;x&#x7684;&#x503C;&#x65F6;&#xFF0C;&#x8981;&#x5230;&#x54EA;&#x4E2A;&#x4F5C;&#x7528;&#x57DF;&#x4E2D;&#x53D6;&#xFF1F;&#x2014;&#x2014;&#x8981;&#x5230;&#x521B;&#x5EFA;fn&#x51FD;&#x6570;&#x7684;&#x90A3;&#x4E2A;&#x4F5C;&#x7528;&#x57DF;&#x4E2D;&#x53D6;&#x2014;&#x2014;&#x65E0;&#x8BBA;fn&#x51FD;&#x6570;&#x5C06;&#x5728;&#x54EA;&#x91CC;&#x8C03;&#x7528;&#x3002;</p>
+<blockquote>
+<p>&#x4E0A;&#x9762;&#x63CF;&#x8FF0;&#x7684;&#x53EA;&#x662F;&#x8DE8;&#x4E00;&#x6B65;&#x4F5C;&#x7528;&#x57DF;&#x53BB;&#x5BFB;&#x627E;&#x3002;</p>
+<ul>
+<li>&#x5982;&#x679C;&#x8DE8;&#x4E86;&#x4E00;&#x6B65;&#xFF0C;&#x8FD8;&#x6CA1;&#x627E;&#x5230;&#x5462;&#xFF1F;&#x2014;&#x2014;&#x63A5;&#x7740;&#x8DE8;&#xFF01;&#x2014;&#x2014;&#x4E00;&#x76F4;&#x8DE8;&#x5230;&#x5168;&#x5C40;&#x4F5C;&#x7528;&#x57DF;&#x4E3A;&#x6B62;&#x3002;&#x8981;&#x662F;&#x5728;&#x5168;&#x5C40;&#x4F5C;&#x7528;&#x57DF;&#x4E2D;&#x90FD;&#x6CA1;&#x6709;&#x627E;&#x5230;&#xFF0C;&#x90A3;&#x5C31;&#x662F;&#x771F;&#x7684;&#x6CA1;&#x6709;&#x4E86;&#x3002;
+&#x8FD9;&#x4E2A;&#x4E00;&#x6B65;&#x4E00;&#x6B65;&#x201C;&#x8DE8;&#x201D;&#x7684;&#x8DEF;&#x7EBF;&#xFF0C;&#x6211;&#x4EEC;&#x79F0;&#x4E4B;&#x4E3A;&#x2014;&#x2014;&#x4F5C;&#x7528;&#x57DF;&#x94FE;&#x3002;</li>
+</ul>
+</blockquote>
+<ul>
+<li><p>&#x6211;&#x4EEC;&#x62FF;&#x6587;&#x5B57;&#x603B;&#x7ED3;&#x4E00;&#x4E0B;&#x53D6;&#x81EA;&#x7531;&#x53D8;&#x91CF;&#x65F6;&#x7684;&#x8FD9;&#x4E2A;&#x201C;&#x4F5C;&#x7528;&#x57DF;&#x94FE;&#x201D;&#x8FC7;&#x7A0B;&#xFF1A;&#xFF08;&#x5047;&#x8BBE;a&#x662F;&#x81EA;&#x7531;&#x91CF;&#xFF09;</p>
+</li>
+<li><p>&#x7B2C;&#x4E00;&#x6B65;&#xFF0C;&#x73B0;&#x5728;&#x5F53;&#x524D;&#x4F5C;&#x7528;&#x57DF;&#x67E5;&#x627E;a&#xFF0C;&#x5982;&#x679C;&#x6709;&#x5219;&#x83B7;&#x53D6;&#x5E76;&#x7ED3;&#x675F;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x5219;&#x7EE7;&#x7EED;&#xFF1B;</p>
+</li>
+<li><p>&#x7B2C;&#x4E8C;&#x6B65;&#xFF0C;&#x5982;&#x679C;&#x5F53;&#x524D;&#x4F5C;&#x7528;&#x57DF;&#x662F;&#x5168;&#x5C40;&#x4F5C;&#x7528;&#x57DF;&#xFF0C;&#x5219;&#x8BC1;&#x660E;a&#x672A;&#x5B9A;&#x4E49;&#xFF0C;&#x7ED3;&#x675F;&#xFF1B;&#x5426;&#x5219;&#x7EE7;&#x7EED;&#xFF1B;</p>
+</li>
+<li><p>&#x7B2C;&#x4E09;&#x6B65;&#xFF0C;&#xFF08;&#x4E0D;&#x662F;&#x5168;&#x5C40;&#x4F5C;&#x7528;&#x57DF;&#xFF0C;&#x90A3;&#x5C31;&#x662F;&#x51FD;&#x6570;&#x4F5C;&#x7528;&#x57DF;&#xFF09;&#x5C06;&#x521B;&#x5EFA;&#x8BE5;&#x51FD;&#x6570;&#x7684;&#x4F5C;&#x7528;&#x57DF;&#x4F5C;&#x4E3A;&#x5F53;&#x524D;&#x4F5C;&#x7528;&#x57DF;&#xFF1B;</p>
+</li>
+<li><p>&#x7B2C;&#x56DB;&#x6B65;&#xFF0C;&#x8DF3;&#x8F6C;&#x5230;&#x7B2C;&#x4E00;&#x6B65;&#x3002;
+<a href="../../../image/closure/prototype50.png" data-lightbox="242750ad-1184-43ba-8069-ffabb88aea9b" data-title="prototype"><img src="../../../image/closure/prototype50.png" alt="prototype"></a>
+<strong>&#x4EE5;&#x4E0A;&#x4EE3;&#x7801;&#x4E2D;&#xFF1A;&#x7B2C;13&#x884C;&#xFF0C;fn()&#x8FD4;&#x56DE;&#x7684;&#x662F;bar&#x51FD;&#x6570;&#xFF0C;&#x8D4B;&#x503C;&#x7ED9;x&#x3002;&#x6267;&#x884C;x()&#xFF0C;&#x5373;&#x6267;&#x884C;bar&#x51FD;&#x6570;&#x4EE3;&#x7801;&#x3002;&#x53D6;b&#x7684;&#x503C;&#x65F6;&#xFF0C;&#x76F4;&#x63A5;&#x5728;fn&#x4F5C;&#x7528;&#x57DF;&#x53D6;&#x51FA;&#x3002;&#x53D6;a&#x7684;&#x503C;&#x65F6;&#xFF0C;&#x8BD5;&#x56FE;&#x5728;fn&#x4F5C;&#x7528;&#x57DF;&#x53D6;&#xFF0C;&#x4F46;&#x662F;&#x53D6;&#x4E0D;&#x5230;&#xFF0C;&#x53EA;&#x80FD;&#x8F6C;&#x5411;&#x521B;&#x5EFA;fn&#x7684;&#x90A3;&#x4E2A;&#x4F5C;&#x7528;&#x57DF;&#x4E2D;&#x53BB;&#x67E5;&#x627E;&#xFF0C;&#x7ED3;&#x679C;&#x627E;&#x5230;&#x4E86;&#x3002;</strong></p>
+</li>
+</ul>
+<h3 id="&#x6DF1;&#x5165;&#x7406;&#x89E3;javascript&#x539F;&#x578B;&#x548C;&#x95ED;&#x5305;&#xFF08;15&#xFF09;&#x2014;&#x2014;&#x95ED;&#x5305;">&#x6DF1;&#x5165;&#x7406;&#x89E3;javascript&#x539F;&#x578B;&#x548C;&#x95ED;&#x5305;&#xFF08;15&#xFF09;&#x2014;&#x2014;&#x95ED;&#x5305;</h3>
+<blockquote>
+<p>&#x9700;&#x8981;&#x77E5;&#x9053;&#x5E94;&#x7528;&#x7684;&#x4E24;&#x79CD;&#x60C5;&#x51B5;&#x5373;&#x53EF;&#x2014;&#x2014;&#x51FD;&#x6570;&#x4F5C;&#x4E3A;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;&#x51FD;&#x6570;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x4F20;&#x9012;&#x3002;</p>
+<ul>
+<li>&#x7B2C;&#x4E00;&#xFF0C;&#x51FD;&#x6570;&#x4F5C;&#x4E3A;&#x8FD4;&#x56DE;&#x503C;
+<a href="../../../image/closure/prototype51.png" data-lightbox="71d90e3e-d6c0-41bc-a54c-c0bfff8c7958" data-title="prototype"><img src="../../../image/closure/prototype51.png" alt="prototype"></a>
+<strong>&#x5982;&#x4E0A;&#x4EE3;&#x7801;&#xFF0C;bar&#x51FD;&#x6570;&#x4F5C;&#x4E3A;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;&#x8D4B;&#x503C;&#x7ED9;f1&#x53D8;&#x91CF;&#x3002;&#x6267;&#x884C;f1(15)&#x65F6;&#xFF0C;&#x7528;&#x5230;&#x4E86;fn&#x4F5C;&#x7528;&#x57DF;&#x4E0B;&#x7684;max&#x53D8;&#x91CF;&#x7684;&#x503C;&#x3002;</strong></li>
+<li>&#x7B2C;&#x4E8C;&#xFF0C;&#x51FD;&#x6570;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x88AB;&#x4F20;&#x9012;
+<a href="../../../image/closure/prototype52.png" data-lightbox="6691ce0e-7d69-4203-b75a-f955dcd86f4d" data-title="prototype"><img src="../../../image/closure/prototype52.png" alt="prototype"></a>
+<strong>&#x5982;&#x4E0A;&#x4EE3;&#x7801;&#x4E2D;&#xFF0C;fn&#x51FD;&#x6570;&#x4F5C;&#x4E3A;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x88AB;&#x4F20;&#x9012;&#x8FDB;&#x5165;&#x53E6;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x8D4B;&#x503C;&#x7ED9;f&#x53C2;&#x6570;&#x3002;&#x6267;&#x884C;f(15)&#x65F6;&#xFF0C;max&#x53D8;&#x91CF;&#x7684;&#x53D6;&#x503C;&#x662F;10&#xFF0C;&#x800C;&#x4E0D;&#x662F;100&#x3002;</strong></li>
+<li>&#x4E0A;&#x4E00;&#x8282;&#x8BB2;&#x5230;&#x81EA;&#x7531;&#x53D8;&#x91CF;&#x8DE8;&#x4F5C;&#x7528;&#x57DF;&#x53D6;&#x503C;&#x65F6;&#xFF0C;&#x66FE;&#x7ECF;&#x5F3A;&#x8C03;&#x8FC7;&#xFF1A;&#x8981;&#x53BB;&#x521B;&#x5EFA;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x7684;&#x4F5C;&#x7528;&#x57DF;&#x53D6;&#x503C;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x201C;&#x7236;&#x4F5C;&#x7528;&#x57DF;&#x201D;&#x3002;&#x7406;&#x89E3;&#x4E86;&#x8FD9;&#x4E00;&#x70B9;&#xFF0C;&#x4EE5;&#x4E0A;&#x4E24;&#x7AEF;&#x4EE3;&#x7801;&#x4E2D;&#xFF0C;&#x81EA;&#x7531;&#x53D8;&#x91CF;&#x5982;&#x4F55;&#x53D6;&#x503C;&#x5E94;&#x8BE5;&#x6BD4;&#x8F83;&#x7B80;&#x5355;&#x3002;</li>
+</ul>
+<p>&#x53E6;&#x5916;&#xFF0C;&#x8BB2;&#x5230;&#x95ED;&#x5305;&#xFF0C;&#x9664;&#x4E86;&#x7ED3;&#x5408;&#x7740;&#x4F5C;&#x7528;&#x57DF;&#x4E4B;&#x5916;&#xFF0C;&#x8FD8;&#x9700;&#x8981;&#x7ED3;&#x5408;&#x7740;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x6808;&#x6765;&#x8BF4;&#x4E00;&#x4E0B;&#x3002;</p>
+<ul>
+<li>&#x5728;&#x524D;&#x9762;&#x8BB2;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x6808;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x63D0;&#x5230;&#x5F53;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x88AB;&#x8C03;&#x7528;&#x5B8C;&#x6210;&#x4E4B;&#x540E;&#xFF0C;&#x5176;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x5C06;&#x88AB;&#x9500;&#x6BC1;&#xFF0C;&#x5176;&#x4E2D;&#x7684;&#x53D8;&#x91CF;&#x4E5F;&#x4F1A;&#x88AB;&#x540C;&#x65F6;&#x9500;&#x6BC1;&#x3002;</li>
+</ul>
+</blockquote>
+<p>&#x4F46;&#x662F;&#x5728;&#x5F53;&#x65F6;&#x90A3;&#x7BC7;&#x6587;&#x7AE0;&#x4E2D;&#x7559;&#x4E86;&#x4E00;&#x4E2A;&#x95EE;&#x53F7;&#x2014;&#x2014;&#x6709;&#x4E9B;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x5B8C;&#x6210;&#x4E4B;&#x540E;&#xFF0C;&#x5176;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x4E0D;&#x4F1A;&#x63A5;&#x7740;&#x88AB;&#x9500;&#x6BC1;&#x3002;&#x8FD9;&#x5C31;&#x662F;&#x9700;&#x8981;&#x7406;&#x89E3;&#x95ED;&#x5305;&#x7684;&#x6838;&#x5FC3;&#x5185;&#x5BB9;&#x3002;</p>
+<ul>
+<li><p>&#x54B1;&#x4EEC;&#x53EF;&#x4EE5;&#x62FF;&#x672C;&#x6587;&#x7684;&#x7B2C;&#x4E00;&#x6BB5;&#x4EE3;&#x7801;&#xFF08;&#x7A0D;&#x4F5C;&#x4FEE;&#x6539;&#xFF09;&#x6765;&#x5206;&#x6790;&#x4E00;&#x4E0B;&#x3002;
+<a href="../../../image/closure/prototype53.png" data-lightbox="d951fd6e-1e5b-4c5a-992d-b03441b2c98c" data-title="prototype"><img src="../../../image/closure/prototype53.png" alt="prototype"></a></p>
+</li>
+<li><p>&#x7B2C;&#x4E00;&#x6B65;&#xFF0C;&#x4EE3;&#x7801;&#x6267;&#x884C;&#x524D;&#x751F;&#x6210;&#x5168;&#x5C40;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#xFF0C;&#x5E76;&#x5728;&#x6267;&#x884C;&#x65F6;&#x5BF9;&#x5176;&#x4E2D;&#x7684;&#x53D8;&#x91CF;&#x8FDB;&#x884C;&#x8D4B;&#x503C;&#x3002;&#x6B64;&#x65F6;&#x5168;&#x5C40;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x662F;&#x6D3B;&#x52A8;&#x72B6;&#x6001;&#x3002;
+<a href="../../../image/closure/prototype54.png" data-lightbox="b09c078b-3a9d-4785-8e56-d30082fcfe72" data-title="prototype"><img src="../../../image/closure/prototype54.png" alt="prototype"></a></p>
+</li>
+<li><p>&#x7B2C;&#x4E8C;&#x6B65;&#xFF0C;&#x6267;&#x884C;&#x7B2C;17&#x884C;&#x4EE3;&#x7801;&#x65F6;&#xFF0C;&#x8C03;&#x7528;fn()&#xFF0C;&#x4EA7;&#x751F;fn()&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#xFF0C;&#x538B;&#x6808;&#xFF0C;&#x5E76;&#x8BBE;&#x7F6E;&#x4E3A;&#x6D3B;&#x52A8;&#x72B6;&#x6001;&#x3002;
+<a href="../../../image/closure/prototype55.png" data-lightbox="f1bdbaf7-d03a-45ac-9c35-9a04d98f5dba" data-title="prototype"><img src="../../../image/closure/prototype55.png" alt="prototype"></a></p>
+</li>
+<li><p>&#x7B2C;&#x4E09;&#x6B65;&#xFF0C;&#x6267;&#x884C;&#x5B8C;&#x7B2C;17&#x884C;&#xFF0C;fn()&#x8C03;&#x7528;&#x5B8C;&#x6210;&#x3002;&#x6309;&#x7406;&#x8BF4;&#x5E94;&#x8BE5;&#x9500;&#x6BC1;&#x6389;fn()&#x7684;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#xFF0C;&#x4F46;&#x662F;&#x8FD9;&#x91CC;&#x4E0D;&#x80FD;&#x8FD9;&#x4E48;&#x505A;&#x3002;</p>
+</li>
+</ul>
+<p><strong>&#x6CE8;&#x610F;&#xFF0C;&#x91CD;&#x70B9;&#x6765;&#x4E86;&#xFF1A;&#x56E0;&#x4E3A;&#x6267;&#x884C;fn()&#x65F6;&#xFF0C;&#x8FD4;&#x56DE;&#x7684;&#x662F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x3002;&#x51FD;&#x6570;&#x7684;&#x7279;&#x522B;&#x4E4B;&#x5904;&#x5728;&#x4E8E;&#x53EF;&#x4EE5;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x72EC;&#x7ACB;&#x7684;&#x4F5C;&#x7528;&#x57DF;&#x3002;&#x800C;&#x6B63;&#x5DE7;&#x5408;&#x7684;&#x662F;&#xFF0C;&#x8FD4;&#x56DE;&#x7684;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x4F53;&#x4E2D;&#xFF0C;&#x8FD8;&#x6709;&#x4E00;&#x4E2A;&#x81EA;&#x7531;&#x53D8;&#x91CF;max&#x8981;&#x5F15;&#x7528;fn&#x4F5C;&#x7528;&#x57DF;&#x4E0B;&#x7684;fn()&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x4E2D;&#x7684;max&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x8FD9;&#x4E2A;max&#x4E0D;&#x80FD;&#x88AB;&#x9500;&#x6BC1;&#xFF0C;&#x9500;&#x6BC1;&#x4E86;&#x4E4B;&#x540E;bar&#x51FD;&#x6570;&#x4E2D;&#x7684;max&#x5C31;&#x627E;&#x4E0D;&#x5230;&#x503C;&#x4E86;&#x3002;</strong></p>
+<ul>
+<li><p>&#x56E0;&#x6B64;&#xFF0C;&#x8FD9;&#x91CC;&#x7684;fn()&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x4E0D;&#x80FD;&#x88AB;&#x9500;&#x6BC1;&#xFF0C;&#x8FD8;&#x4F9D;&#x7136;&#x5B58;&#x5728;&#x4E0E;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x6808;&#x4E2D;&#x3002;
+&#x5373;&#xFF0C;&#x6267;&#x884C;&#x5230;&#x7B2C;18&#x884C;&#x65F6;&#xFF0C;&#x5168;&#x5C40;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x5C06;&#x53D8;&#x4E3A;&#x6D3B;&#x52A8;&#x72B6;&#x6001;&#xFF0C;&#x4F46;&#x662F;fn()&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x4F9D;&#x7136;&#x4F1A;&#x5728;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x6808;&#x4E2D;&#x3002;&#x53E6;&#x5916;&#xFF0C;&#x6267;&#x884C;&#x5B8C;&#x7B2C;18&#x884C;&#xFF0C;&#x5168;&#x5C40;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x4E2D;&#x7684;max&#x88AB;&#x8D4B;&#x503C;&#x4E3A;100&#x3002;&#x5982;&#x4E0B;&#x56FE;&#xFF1A;
+<a href="../../../image/closure/prototype56.png" data-lightbox="7f143616-3efb-4ea8-b7cb-dc7cd7c0ccaa" data-title="prototype"><img src="../../../image/closure/prototype56.png" alt="prototype"></a></p>
+</li>
+<li><p>&#x7B2C;&#x56DB;&#x6B65;&#xFF0C;&#x6267;&#x884C;&#x5230;&#x7B2C;20&#x884C;&#xFF0C;&#x6267;&#x884C;f1(15)&#xFF0C;&#x5373;&#x6267;&#x884C;bar(15)&#xFF0C;&#x521B;&#x5EFA;bar(15)&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#xFF0C;&#x5E76;&#x5C06;&#x5176;&#x8BBE;&#x7F6E;&#x4E3A;&#x6D3B;&#x52A8;&#x72B6;&#x6001;&#x3002;
+<a href="../../../image/closure/prototype57.png" data-lightbox="57212032-fb1b-4a1d-b0d2-57ddb61b235e" data-title="prototype"><img src="../../../image/closure/prototype57.png" alt="prototype"></a></p>
+</li>
+</ul>
+<p>-&#x6267;&#x884C;bar(15)&#x65F6;&#xFF0C;max&#x662F;&#x81EA;&#x7531;&#x53D8;&#x91CF;&#xFF0C;&#x9700;&#x8981;&#x5411;&#x521B;&#x5EFA;bar&#x51FD;&#x6570;&#x7684;&#x4F5C;&#x7528;&#x57DF;&#x4E2D;&#x67E5;&#x627E;&#xFF0C;&#x627E;&#x5230;&#x4E86;max&#x7684;&#x503C;&#x4E3A;10&#x3002;&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x5728;&#x4F5C;&#x7528;&#x57DF;&#x94FE;&#x4E00;&#x8282;&#x5DF2;&#x7ECF;&#x8BB2;&#x8FC7;&#x3002;</p>
+<p> &#x8FD9;&#x91CC;&#x7684;&#x91CD;&#x70B9;&#x5C31;&#x5728;&#x4E8E;&#xFF0C;&#x521B;&#x5EFA;bar&#x51FD;&#x6570;&#x662F;&#x5728;&#x6267;&#x884C;fn()&#x65F6;&#x521B;&#x5EFA;&#x7684;&#x3002;fn()&#x65E9;&#x5C31;&#x6267;&#x884C;&#x7ED3;&#x675F;&#x4E86;&#xFF0C;&#x4F46;&#x662F;fn()&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x8FD8;&#x5B58;&#x5728;&#x4E0E;&#x6808;&#x4E2D;&#xFF0C;&#x56E0;&#x6B64;bar(15)&#x65F6;&#xFF0C;max&#x53EF;&#x4EE5;&#x67E5;&#x627E;&#x5230;&#x3002;&#x5982;&#x679C;fn()&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x9500;&#x6BC1;&#x4E86;&#xFF0C;&#x90A3;&#x4E48;max&#x5C31;&#x627E;&#x4E0D;&#x5230;&#x4E86;&#x3002;</p>
+<p>   &#x4F7F;&#x7528;&#x95ED;&#x5305;&#x4F1A;&#x589E;&#x52A0;&#x5185;&#x5BB9;&#x5F00;&#x9500;&#xFF0C;&#x73B0;&#x5728;&#x5F88;&#x660E;&#x663E;&#x4E86;&#x5427;&#xFF01;</p>
+<ol>
+<li><p>&#x7B2C;&#x4E94;&#x6B65;&#xFF0C;&#x6267;&#x884C;&#x5B8C;20&#x884C;&#x5C31;&#x662F;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x7684;&#x9500;&#x6BC1;&#x8FC7;&#x7A0B;&#xFF0C;&#x8FD9;&#x91CC;&#x5C31;&#x4E0D;&#x518D;&#x8D58;&#x8FF0;&#x4E86;&#x3002;</p>
+</li>
+<li><p>&#x95ED;&#x5305;&#x548C;&#x4F5C;&#x7528;&#x57DF;&#x3001;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x6709;&#x7740;&#x5BC6;&#x4E0D;&#x53EF;&#x5206;&#x7684;&#x5173;&#x7CFB;&#xFF0C;&#x771F;&#x7684;&#x662F;&#x201C;&#x60F3;&#x8BF4;&#x7231;&#x4F60;&#x4E0D;&#x5BB9;&#x6613;&#x201D;&#xFF01;</p>
+</li>
+<li><p>&#x53E6;&#x5916;&#xFF0C;&#x95ED;&#x5305;&#x5728;jQuery&#x4E2D;&#x7684;&#x5E94;&#x7528;&#x975E;&#x5E38;&#x591A;&#xFF0C;&#x5728;&#x8FD9;&#x91CC;&#x5C31;&#x4E0D;&#x4E00;&#x4E00;&#x4E3E;&#x4F8B;&#x5B50;&#x4E86;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x65E0;&#x8BBA;&#x4F60;&#x662F;&#x60F3;&#x4E86;&#x89E3;&#x4E00;&#x4E2A;&#x7ECF;&#x5178;&#x7684;&#x6846;&#x67B6;/&#x7C7B;&#x5E93;&#xFF0C;&#x8FD8;&#x662F;&#x60F3;&#x81EA;&#x5DF1;&#x5F00;&#x53D1;&#x4E00;&#x4E2A;&#x63D2;&#x4EF6;&#x6216;&#x8005;&#x7C7B;&#x5E93;&#xFF0C;&#x50CF;&#x95ED;&#x5305;&#x3001;&#x539F;&#x578B;&#x8FD9;&#x4E9B;&#x57FA;&#x672C;&#x7684;&#x7406;&#x8BBA;&#xFF0C;&#x662F;&#x4E00;&#x5B9A;&#x8981;&#x77E5;&#x9053;&#x7684;&#x3002;&#x5426;&#x5219;&#xFF0C;&#x5230;&#x65F6;&#x5019;&#x51FA;&#x4E86;BUG&#x4F60;&#x90FD;&#x4E0D;&#x77E5;&#x9053;&#x4E3A;&#x4EC0;&#x4E48;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x4E9B;BUG&#x53EF;&#x80FD;&#x5B8C;&#x5168;&#x5728;&#x4F60;&#x7684;&#x77E5;&#x8BC6;&#x8303;&#x56F4;&#x4E4B;&#x5916;&#x3002;</p>
+</li>
+</ol>
+<h3 id="&#x6DF1;&#x5165;&#x7406;&#x89E3;javascript&#x539F;&#x578B;&#x548C;&#x95ED;&#x5305;&#xFF08;18&#xFF09;&#x2014;&#x2014;&#x8865;&#x5145;&#xFF1A;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x548C;&#x4F5C;&#x7528;&#x57DF;&#x7684;&#x5173;&#x7CFB;">&#x6DF1;&#x5165;&#x7406;&#x89E3;javascript&#x539F;&#x578B;&#x548C;&#x95ED;&#x5305;&#xFF08;18&#xFF09;&#x2014;&#x2014;&#x8865;&#x5145;&#xFF1A;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x548C;&#x4F5C;&#x7528;&#x57DF;&#x7684;&#x5173;&#x7CFB;</h3>
+<ul>
+<li>&#x4F5C;&#x7528;&#x57DF;&#x548C;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x7EDD;&#x5BF9;&#x4E0D;&#x662F;&#x4E00;&#x56DE;&#x4E8B;&#x513F;&#x3002;&#x518D;&#x8BF4;&#x660E;&#x4E4B;&#x524D;&#xFF0C;&#x54B1;&#x4EEC;&#x5148;&#x7528;&#x7B80;&#x5355;&#x7684;&#x8BED;&#x8A00;&#x6765;&#x6982;&#x62EC;&#x4E00;&#x4E0B;&#x8FD9;&#x4E24;&#x4E2A;&#x7684;&#x533A;&#x522B;&#x3002;</li>
+<li><p>&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#xFF1A;
+&#x53EF;&#x4EE5;&#x7406;&#x89E3;&#x4E3A;&#x4E00;&#x4E2A;&#x770B;&#x4E0D;&#x89C1;&#x6478;&#x4E0D;&#x7740;&#x7684;&#x5BF9;&#x8C61;&#xFF08;&#x6709;&#x82E5;&#x5E72;&#x4E2A;&#x5C5E;&#x6027;&#xFF09;&#xFF0C;&#x867D;&#x7136;&#x770B;&#x4E0D;&#x89C1;&#x6478;&#x4E0D;&#x7740;&#xFF0C;&#x4F46;&#x786E;&#x5B9E;&#x5B9E;&#x5B9E;&#x5728;&#x5728;&#x5B58;&#x5728;&#x7684;&#xFF0C;&#x56E0;&#x4E3A;&#x6240;&#x6709;&#x7684;&#x53D8;&#x91CF;&#x90FD;&#x5728;&#x91CC;&#x9762;&#x5B58;&#x50A8;&#x7740;&#xFF0C;&#x8981;&#x4E0D;&#x7136;&#x54B1;&#x4EEC;&#x5B9A;&#x4E49;&#x7684;&#x53D8;&#x91CF;&#x5728;&#x54EA;&#x91CC;&#x5B58;&#xFF1F;</p>
+<p>&#x53E6;&#x5916;&#xFF0C;&#x5BF9;&#x4E8E;&#x51FD;&#x6570;&#x6765;&#x8BF4;&#xFF0C;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x662F;&#x5728;&#x8C03;&#x7528;&#x65F6;&#x521B;&#x5EFA;&#x7684;&#xFF0C;&#x8FD9;&#x4E2A;&#x5F88;&#x597D;&#x7406;&#x89E3;&#x3002;&#x62FF;&#x53C2;&#x6570;&#x505A;&#x4F8B;&#x5B50;&#xFF0C;&#x4F60;&#x4E0D;&#x8C03;&#x7528;&#x51FD;&#x6570;&#xFF0C;&#x6211;&#x54EA;&#x513F;&#x77E5;&#x9053;&#x4F60;&#x8981;&#x7ED9;&#x6211;&#x4F20;&#x4EC0;&#x4E48; &#x53C2;&#x6570;&#xFF1F;</p>
+</li>
+<li><p>01 &#x4F5C;&#x7528;&#x57DF;:</p>
+<blockquote>
+<p>&#x9996;&#x5148;&#xFF0C;&#x5B83;&#x5F88;&#x62BD;&#x8C61;&#x3002;&#x7B2C;&#x4E8C;&#xFF0C;&#x8BB0;&#x4F4F;&#x4E00;&#x53E5;&#x8BDD;&#xFF1A;&#x9664;&#x4E86;&#x5168;&#x5C40;&#x4F5C;&#x7528;&#x57DF;&#xFF0C;&#x53EA;&#x6709;&#x51FD;&#x6570;&#x624D;&#x80FD;&#x521B;&#x5EFA;&#x4F5C;&#x7528;&#x57DF;&#x3002;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x5C31;&#x521B;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;&#x4F5C;&#x7528;&#x57DF;&#xFF0C;&#x65E0;&#x8BBA;&#x4F60;&#x8C03;&#x7528;&#x4E0D;&#x8C03;&#x7528;&#xFF0C;&#x51FD;&#x6570;&#x53EA;&#x8981;&#x521B;&#x5EFA;&#x4E86;&#xFF0C;&#x5B83;&#x5C31;&#x6709;&#x72EC;&#x7ACB;&#x7684;&#x4F5C;&#x7528;&#x57DF;&#xFF0C;&#x5C31;&#x6709;&#x81EA;&#x5DF1;&#x7684;&#x4E00;&#x4E2A;&#x201C;&#x5730;&#x76D8;&#x201D;&#x3002;</p>
+</blockquote>
+</li>
+<li><p>02 &#x4E24;&#x8005;&#xFF1A;
+&#x4E00;&#x4E2A;&#x4F5C;&#x7528;&#x57DF;&#x4E0B;&#x53EF;&#x80FD;&#x5305;&#x542B;&#x82E5;&#x5E72;&#x4E2A;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x3002;&#x6709;&#x53EF;&#x80FD;&#x4ECE;&#x6765;&#x6CA1;&#x6709;&#x8FC7;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#xFF08;&#x51FD;&#x6570;&#x4ECE;&#x6765;&#x5C31;&#x6CA1;&#x6709;&#x88AB;&#x8C03;&#x7528;&#x8FC7;&#xFF09;&#xFF1B;&#x6709;&#x53EF;&#x80FD;&#x6709;&#x8FC7;&#xFF0C;&#x73B0;&#x5728;&#x51FD;&#x6570;&#x88AB;&#x8C03;&#x7528;&#x5B8C;&#x6BD5;&#x540E;&#xFF0C;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x88AB;&#x9500;&#x6BC1;&#x4E86;&#xFF1B;&#x6709;&#x53EF;&#x80FD;&#x540C;&#x65F6;&#x5B58;&#x5728;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#xFF08;&#x95ED;&#x5305;&#xFF09;&#x3002;</p>
+</li>
+<li><p>&#x4E14;&#x770B;&#x4E0B;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x3002;</p>
+</li>
+<li><p>&#x7B2C;&#x4E00;&#xFF0C;&#x9664;&#x4E86;&#x5168;&#x5C40;&#x4F5C;&#x7528;&#x57DF;&#x5916;&#xFF0C;&#x6BCF;&#x4E2A;&#x51FD;&#x6570;&#x90FD;&#x8981;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x4F5C;&#x7528;&#x57DF;&#x3002;&#x4F5C;&#x7528;&#x57DF;&#x4E4B;&#x95F4;&#x7684;&#x53D8;&#x91CF;&#x662F;&#x76F8;&#x4E92;&#x72EC;&#x7ACB;&#x7684;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x5168;&#x5C40;&#x4F5C;&#x7528;&#x57DF;&#x4E2D;&#x7684;x&#x548C;fn&#x4F5C;&#x7528;&#x57DF;&#x4E2D;&#x7684;x&#xFF0C;&#x4E24;&#x8005;&#x6BEB;&#x65E0;&#x5173;&#x7CFB;&#xFF0C;&#x4E92;&#x4E0D;&#x5F71;&#x54CD;&#xFF0C;&#x548C;&#x5E73;&#x76F8;&#x5904;&#x3002;
+<a href="../../../image/closure/prototype58.png" data-lightbox="9388ebb8-dae7-402e-b10e-f7a2e6b39663" data-title="prototype"><img src="../../../image/closure/prototype58.png" alt="prototype"></a></p>
+</li>
+<li><p>&#x7B2C;&#x4E8C;&#xFF0C;&#x7A0B;&#x5E8F;&#x6267;&#x884C;&#x4E4B;&#x524D;&#xFF0C;&#x4F1A;&#x751F;&#x6210;&#x5168;&#x5C40;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#xFF0C;&#x5E76;&#x5728;&#x7A0B;&#x5E8F;&#x6267;&#x884C;&#x65F6;&#xFF0C;&#x5BF9;&#x5176;&#x4E2D;&#x7684;&#x53D8;&#x91CF;&#x8D4B;&#x503C;&#x3002;
+<a href="../../../image/closure/prototype59.png" data-lightbox="c631ea71-907e-480e-a496-41b33621644e" data-title="prototype"><img src="../../../image/closure/prototype59.png" alt="prototype"></a></p>
+</li>
+<li><p>&#x7B2C;&#x4E09;&#xFF0C;&#x7A0B;&#x5E8F;&#x6267;&#x884C;&#x5230;&#x7B2C;17&#x884C;&#xFF0C;&#x8C03;&#x7528;fn(5)&#xFF0C;&#x4F1A;&#x4EA7;&#x751F;fn(5)&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#xFF0C;&#x5E76;&#x538B;&#x6808;&#xFF0C;&#x5E76;&#x8BBE;&#x7F6E;&#x4E3A;&#x6D3B;&#x52A8;&#x72B6;&#x6001;&#x3002;
+<a href="../../../image/closure/prototype60.png" data-lightbox="95b39ae4-3228-479c-b557-3f4b5563fd54" data-title="prototype"><img src="../../../image/closure/prototype60.png" alt="prototype"></a></p>
+</li>
+<li><p>&#x7B2C;&#x56DB;&#xFF0C;&#x6267;&#x884C;&#x5B8C;&#x7B2C;17&#x884C;&#xFF0C;fn(5)&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x8D4B;&#x503C;&#x7ED9;&#x4E86;f1&#x3002;&#x6B64;&#x65F6;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x53C8;&#x91CD;&#x65B0;&#x56DE;&#x5230;&#x5168;&#x5C40;&#xFF0C;&#x4F46;&#x662F;fn(5)&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x4E0D;&#x80FD;&#x5C31;&#x6B64;&#x9500;&#x6BC1;&#xFF0C;&#x56E0;&#x4E3A;&#x5176;&#x4E2D;&#x6709;&#x95ED;&#x5305;&#x7684;&#x5F15;&#x7528;&#xFF08;&#x53EF;&#x7FFB;&#x770B;&#x524D;&#x9762;&#x6587;&#x7AE0;&#xFF0C;&#x6B64;&#x5904;&#x4E0D;&#x518D;&#x8D58;&#x8FF0;&#xFF09;&#x3002;
+<a href="../../../image/closure/prototype61.png" data-lightbox="cd87c58a-29ac-4403-bbb6-d3bb723d80bd" data-title="prototype"><img src="../../../image/closure/prototype61.png" alt="prototype"></a></p>
+</li>
+<li>&#x7B2C;&#x4E94;&#xFF0C;&#x7EE7;&#x7EED;&#x6267;&#x884C;&#x7B2C;18&#x884C;&#xFF0C;&#x518D;&#x6B21;&#x8C03;&#x7528;fn&#x51FD;&#x6570;&#x2014;&#x2014;fn(10)&#x3002;&#x4EA7;&#x751F;fn(5)&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#xFF0C;&#x5E76;&#x538B;&#x6808;&#xFF0C;&#x5E76;&#x8BBE;&#x7F6E;&#x4E3A;&#x6D3B;&#x52A8;&#x72B6;&#x6001;&#x3002;&#x4F46;&#x662F;&#x6B64;&#x65F6;fn(5)&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x8FD8;&#x5728;&#x5185;&#x5B58;&#x4E2D;&#x2014;&#x2014;&#x4E00;&#x4E2A;&#x4F5C;&#x7528;&#x57DF;&#x4E0B;&#x540C;&#x65F6;&#x5B58;&#x5728;&#x4E24;&#x4E2A;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#x3002;
+<a href="../../../image/closure/prototype62.png" data-lightbox="37a90685-fa8d-4168-bd05-74f037a9b877" data-title="prototype"><img src="../../../image/closure/prototype62.png" alt="prototype"></a></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../cross-domain/cross-domain.html" class="navigation navigation-prev " aria-label="Previous page: 跨域相关">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../how-to-introduce/introduce.html" class="navigation navigation-next " aria-label="Next page: summary">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"深入理解 javascript 原型和闭包","level":"1.2.4.2","depth":3,"next":{"title":"summary","level":"1.2.4.3","depth":3,"path":"tools/interview/how-to-introduce/introduce.md","ref":"tools/interview/how-to-introduce/introduce.md","articles":[]},"previous":{"title":"跨域相关","level":"1.2.4.1","depth":3,"path":"tools/interview/cross-domain/cross-domain.md","ref":"tools/interview/cross-domain/cross-domain.md","articles":[]},"dir":"ltr"},"config":{"plugins":["mouseflow","lightbox"],"styles":{"website":"./styles/website.css"},"pluginsConfig":{"mouseflow":{"projectId":"12345678abc"},"lightbox":{"jquery":true,"sameUuid":false},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"lyj","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"lyj's Glory","language":"zh-hans","gitbook":"3.2.3","description":"select * from learn"},"file":{"path":"tools/interview/prototype-closure/prototype-closure.md","mtime":"2020-06-14T18:47:03.152Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-14T18:47:53.402Z"},"basePath":"../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+
+        
+    <script src="../../../gitbook/gitbook.js"></script>
+    <script src="../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-lightbox/js/lightbox.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
